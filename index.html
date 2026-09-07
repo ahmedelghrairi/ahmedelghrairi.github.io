@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmed El Ghrairi | Data Analyst</title>
+<meta name="description" content="Portfolio d'Ahmed El Ghrairi, Data Analyst à Marseille. Dix ans de terrain en commerce et marketing, aujourd'hui au service de l'analyse de données.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c2331;
+  --ink-soft:#4a5468;
+  --bg:#faf8f4;
+  --card:#ffffff;
+  --accent:#1f4e79;
+  --accent-soft:#e8eff6;
+  --line:#e5e1d8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.65;
+  font-size:16px;
+}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.2}
+a{color:var(--accent)}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+
+/* Navigation */
+nav{
+  position:sticky;top:0;z-index:10;
+  background:rgba(250,248,244,.92);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:1000px;margin:0 auto;padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
+}
+.nav-name{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.nav-links{display:flex;gap:20px;flex-wrap:wrap}
+.nav-links a{color:var(--ink-soft);text-decoration:none;font-size:.92rem;font-weight:500}
+.nav-links a:hover{color:var(--accent)}
+
+/* Hero */
+.hero{padding:72px 0 64px}
+.hero-inner{display:flex;align-items:center;gap:48px;flex-wrap:wrap}
+.hero-photo{
+  width:210px;height:210px;border-radius:50%;object-fit:cover;object-position:top;
+  border:5px solid #fff;box-shadow:0 8px 30px rgba(31,78,121,.18);
+  flex-shrink:0;
+}
+.hero-text{flex:1;min-width:280px}
+.hero-text .hello{color:var(--accent);font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-size:.8rem}
+.hero-text h1{font-size:2.6rem;margin:6px 0 4px}
+.hero-text .role{font-size:1.15rem;color:var(--ink-soft);font-weight:500;margin-bottom:16px}
+.hero-text p.pitch{max-width:560px;margin-bottom:24px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:10px 20px;border-radius:8px;text-decoration:none;
+  font-weight:600;font-size:.92rem;transition:transform .15s ease;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+.hero-meta{margin-top:18px;color:var(--ink-soft);font-size:.9rem}
+
+/* Sections */
+section{padding:56px 0}
+section h2{font-size:1.8rem;margin-bottom:8px}
+.section-sub{color:var(--ink-soft);margin-bottom:32px;max-width:640px}
+.alt{background:#f2efe8}
+
+/* Parcours */
+.timeline{list-style:none;margin-top:8px;border-left:2px solid var(--accent);padding-left:0}
+.timeline li{position:relative;padding:0 0 26px 28px}
+.timeline li::before{
+  content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;
+  background:var(--accent);border:2.5px solid var(--bg);
+}
+.timeline .t-title{font-weight:600}
+.timeline .t-note{color:var(--ink-soft);font-size:.94rem}
+.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:start}
+@media (max-width:760px){.about-grid{grid-template-columns:1fr}}
+.about-grid p{margin-bottom:14px}
+
+/* Compétences */
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.skill-card{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;
+}
+.skill-card h3{font-size:1.05rem;margin-bottom:12px;color:var(--accent)}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{
+  background:var(--accent-soft);color:var(--accent);border-radius:999px;
+  padding:4px 12px;font-size:.83rem;font-weight:500;
+}
+
+/* Projets */
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px}
+/* Les cartes projet seront ajoutées ici au fur et à mesure, sur ce modèle :
+<article class="project-card">
+  <p class="p-tag">Qualité de données · IA</p>
+  <h3>Titre du projet</h3>
+  <p>Une phrase de résumé orientée besoin métier et résultat.</p>
+  <p class="p-tools">Python · Pandera · pandas</p>
+  <a class="p-link" href="projets/nom-du-projet.html">Lire l'étude de cas</a>
+</article>
+*/
+.project-card{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px;
+  display:flex;flex-direction:column;gap:10px;transition:box-shadow .15s ease;
+}
+.project-card:hover{box-shadow:0 6px 24px rgba(28,35,49,.08)}
+.p-tag{color:var(--accent);font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.project-card h3{font-size:1.15rem}
+.p-tools{color:var(--ink-soft);font-size:.85rem}
+.p-link{font-weight:600;font-size:.92rem;text-decoration:none;margin-top:auto}
+.p-link:hover{text-decoration:underline}
+
+/* Veille */
+.veille-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:8px}
+.veille-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px}
+.veille-card h3{font-size:1.02rem;margin-bottom:10px;color:var(--accent)}
+.veille-card ul{list-style:none}
+.veille-card li{padding:6px 0;border-bottom:1px dashed var(--line);font-size:.93rem}
+.veille-card li:last-child{border-bottom:none}
+.veille-card li span{color:var(--ink-soft);font-size:.85rem;display:block}
+.veille-note{
+  margin-top:28px;background:var(--accent-soft);border-radius:12px;padding:22px 24px;
+  border-left:4px solid var(--accent);
+}
+.veille-note p{margin-bottom:10px}
+.veille-note p:last-child{margin-bottom:0}
+
+/* Contact */
+.contact-box{
+  background:var(--ink);color:#f4f2ec;border-radius:16px;padding:44px 36px;
+  text-align:center;
+}
+.contact-box h2{color:#fff}
+.contact-box p{max-width:520px;margin:10px auto 24px;color:#cfd4de}
+.contact-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.contact-links a{
+  color:#fff;border:1.5px solid rgba(255,255,255,.4);border-radius:8px;
+  padding:10px 20px;text-decoration:none;font-weight:600;font-size:.92rem;
+}
+.contact-links a:hover{background:rgba(255,255,255,.1)}
+
+footer{padding:28px 0 36px;color:var(--ink-soft);font-size:.85rem;text-align:center}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-name" href="#">Ahmed El Ghrairi</a>
+    <div class="nav-links">
+      <a href="#parcours">Parcours</a>
+      <a href="#competences">Compétences</a>
+      <a href="#projets">Projets</a>
+      <a href="#veille">Veille</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <img class="hero-photo" src="photo.jpg" alt="Portrait d'Ahmed El Ghrairi">
+    <div class="hero-text">
+      <p class="hello">Portfolio Data</p>
+      <h1>Ahmed El Ghrairi</h1>
+      <p class="role">Manager commercial &amp; Data Analyst</p>
+      <p class="pitch">Dix ans de terrain entre marketing digital et gestion de commerces, aujourd'hui au service de l'analyse de données. Je transforme des fichiers bruts en décisions concrètes, avec une exigence simple : des chiffres fiables avant toute analyse.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#projets">Voir mes projets</a>
+        <a class="btn btn-ghost" href="#contact">Me contacter</a>
+      </div>
+      <p class="hero-meta">Marseille, France</p>
+    </div>
+  </div>
+</header>
+
+<section id="parcours">
+  <div class="wrap">
+    <h2>Mon parcours</h2>
+    <p class="section-sub">Je ne viens pas de l'informatique, et c'est une force : je connais le terrain dont parlent les données.</p>
+    <div class="about-grid">
+      <div>
+        <p>J'ai commencé dans le marketing digital et la communication, en Tunisie, pendant deux ans. Puis j'ai passé cinq ans à gérer des magasins de proximité à Marseille, chez Carrefour City, Intermarché et Petit Casino. Gérer un magasin, c'est déjà travailler avec la donnée : des marges à surveiller, des stocks à valoriser, de la démarque à expliquer, des décisions à prendre chaque semaine sur la base de chiffres.</p>
+        <p>Ce qui me manquait, c'étaient les outils pour aller au fond de ces chiffres. Fin 2025, j'ai entamé la formation Data Analyst d'OpenClassrooms, un diplôme RNCP de niveau 6, pour les acquérir sérieusement : Python, SQL, statistiques, modélisation en entrepôt de données, datavisualisation. Douze projets plus tard, ce portfolio montre ce que je sais faire.</p>
+        <p>Quand j'analyse les ventes, les stocks ou les marges d'une entreprise, je sais ce que ces chiffres signifient pour les équipes qui les vivent au quotidien. C'est cette double lecture, métier et technique, que j'apporte.</p>
+      </div>
+      <ul class="timeline">
+        <li>
+          <p class="t-title">Marketing digital et communication</p>
+          <p class="t-note">Deux ans en Tunisie, après des études de marketing et de gestion</p>
+        </li>
+        <li>
+          <p class="t-title">Management de commerces</p>
+          <p class="t-note">Cinq ans à Marseille : Carrefour City, Intermarché, Petit Casino</p>
+        </li>
+        <li>
+          <p class="t-title">Master Management et Stratégie d'entreprise</p>
+          <p class="t-note">Diplôme bac+5, ESTC Marseille</p>
+        </li>
+        <li>
+          <p class="t-title">Formation Data Analyst, OpenClassrooms</p>
+          <p class="t-note">2025 à 2026, diplôme RNCP niveau 6, douze projets pratiques</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="competences" class="alt">
+  <div class="wrap">
+    <h2>Compétences</h2>
+    <p class="section-sub">Les outils que j'utilise dans mes projets, du nettoyage des données à la restitution aux décideurs.</p>
+    <div class="skills">
+      <div class="skill-card">
+        <h3>Analyse et statistiques</h3>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">pandas</span>
+          <span class="tag">NumPy</span>
+          <span class="tag">SciPy</span>
+          <span class="tag">Tests statistiques</span>
+          <span class="tag">ACP</span>
+          <span class="tag">Clustering</span>
+          <span class="tag">Séries temporelles</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Data engineering et BI</h3>
+        <div class="tags">
+          <span class="tag">SQL</span>
+          <span class="tag">Snowflake</span>
+          <span class="tag">dbt Cloud</span>
+          <span class="tag">Power BI et DAX</span>
+          <span class="tag">Excel avancé</span>
+          <span class="tag">Modélisation en couches</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Qualité, restitution et outils</h3>
+        <div class="tags">
+          <span class="tag">Pandera</span>
+          <span class="tag">Git et GitHub</span>
+          <span class="tag">matplotlib</span>
+          <span class="tag">seaborn</span>
+          <span class="tag">Plotly</span>
+          <span class="tag">python-pptx</span>
+          <span class="tag">openpyxl</span>
+          <span class="tag">Streamlit (en cours)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projets">
+  <div class="wrap">
+    <h2>Projets</h2>
+    <p class="section-sub">Chaque projet est présenté de la même façon : le contexte et le besoin métier, les données et leurs limites, la démarche, les résultats et mes recommandations. Le code complet est disponible sur GitHub.</p>
+    <div class="projects">
+      <!-- Les cartes projet seront insérées ici, une par projet -->
+    </div>
+  </div>
+</section>
+
+<section id="veille" class="alt">
+  <div class="wrap">
+    <h2>Ma veille métier et technologique</h2>
+    <p class="section-sub">Le métier de data analyst évolue vite. Plutôt que de subir ce rythme, j'ai mis en place un dispositif de veille simple, automatisé et tenable dans la durée. Ma règle : aucune décision technique n'est prise à partir d'une source de découverte seule.</p>
+    <div class="veille-grid">
+      <div class="veille-card">
+        <h3>Sources primaires, pour décider</h3>
+        <ul>
+          <li>Documentation officielle des outils, version relevée et figée dans chaque projet<span>Consultée à chaque besoin</span></li>
+          <li>Dépôts GitHub des librairies que j'utilise, dont Pandera<span>Notifications automatiques de nouvelles versions</span></li>
+          <li>CNIL, pour le volet réglementaire et RGPD<span>Consultation trimestrielle, sans alerte pour éviter la surcharge</span></li>
+        </ul>
+      </div>
+      <div class="veille-card">
+        <h3>Sources de découverte, pour repérer</h3>
+        <ul>
+          <li>Data Elixir, newsletter hebdomadaire du mardi<span>Abonnement mail avec libellé Gmail dédié, isolé de ma boîte de réception</span></li>
+          <li>Alerte Google sur la validation de données en Python<span>Hebdomadaire, meilleurs résultats uniquement</span></li>
+          <li>Comptes professionnels data suivis sur LinkedIn<span>Contenu pédagogique sur le métier</span></li>
+        </ul>
+      </div>
+      <div class="veille-card">
+        <h3>Mon rituel</h3>
+        <ul>
+          <li>20 minutes par semaine<span>Lecture de la newsletter</span></li>
+          <li>30 minutes par mois<span>Notes de version des librairies utilisées</span></li>
+          <li>1 heure par trimestre<span>Réexamen des solutions écartées lors de mes comparatifs</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="veille-note">
+      <p><strong>Ce que cette veille produit concrètement.</strong> Sur mon dernier projet, elle m'a permis de comparer quatre solutions de contrôle qualité des données (Pandera, contrôles pandas assistés par IA, Great Expectations, dbt) sur des critères explicites : pertinence au besoin, lisibilité pour un profil non technique, coût, reproductibilité, conformité RGPD et sobriété. J'ai retenu Pandera en solution principale, complétée par des contrôles pandas pour les règles entre tables, et j'ai documenté pourquoi les deux autres étaient écartées et dans quelles conditions les réexaminer.</p>
+      <p>La décision, prise sur dossier, a ensuite été confirmée en testant les deux options retenues sur les données réelles du projet. C'est ma façon de faire de la veille : pas une collecte de liens, mais un outil de décision.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box">
+      <h2>Travaillons ensemble</h2>
+      <p>Je suis à l'écoute d'opportunités en analyse de données et business intelligence, à Marseille et ses alentours. Parlons de vos données.</p>
+      <div class="contact-links">
+        <a href="mailto:ahmed.ghrairi1993@outlook.com">ahmed.ghrairi1993@outlook.com</a>
+        <a href="https://www.linkedin.com/in/ahmed-el-ghrairi-a581ba177/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/ahmedelghrairi" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Ahmed El Ghrairi, 2026. Site construit avec HTML et CSS, publié avec GitHub Pages.</p>
+</footer>
+
+</body>
+</html>
