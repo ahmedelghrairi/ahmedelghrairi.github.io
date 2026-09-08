@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Étude de marché international | Ahmed El Ghrairi</title>
+<meta name="description" content="Étude de cas : segmentation de 165 pays par ACP et clustering pour recommander des marchés d'export à un comité de direction.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c2331;
+  --ink-soft:#4a5468;
+  --bg:#faf8f4;
+  --card:#ffffff;
+  --accent:#1f4e79;
+  --accent-soft:#e8eff6;
+  --line:#e5e1d8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.7;font-size:16px;
+}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.25}
+a{color:var(--accent)}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px}
+
+nav{
+  position:sticky;top:0;z-index:10;
+  background:rgba(250,248,244,.92);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:1000px;margin:0 auto;padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
+}
+.nav-name{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.nav-links{display:flex;gap:20px;flex-wrap:wrap}
+.nav-links a{color:var(--ink-soft);text-decoration:none;font-size:.92rem;font-weight:500}
+.nav-links a:hover{color:var(--accent)}
+
+.case-head{padding:56px 0 36px;border-bottom:1px solid var(--line)}
+.case-head .kicker{color:var(--accent);font-weight:600;letter-spacing:.05em;text-transform:uppercase;font-size:.78rem}
+.case-head h1{font-size:2.1rem;margin:8px 0 14px}
+.case-head .lede{color:var(--ink-soft);font-size:1.05rem;max-width:680px}
+.case-links{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:9px 18px;border-radius:8px;text-decoration:none;
+  font-weight:600;font-size:.9rem;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+.tools-line{margin-top:18px;color:var(--ink-soft);font-size:.88rem}
+
+.facts{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;
+  margin:36px 0 8px;
+}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.fact .n{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.45rem;color:var(--accent)}
+.fact .l{color:var(--ink-soft);font-size:.85rem;margin-top:4px}
+
+article{padding:16px 0 56px}
+article h2{font-size:1.45rem;margin:40px 0 14px}
+article p{margin-bottom:14px}
+article ul{margin:0 0 14px 22px}
+article li{margin-bottom:8px}
+.note{
+  background:var(--accent-soft);border-left:4px solid var(--accent);
+  border-radius:0 10px 10px 0;padding:16px 20px;margin:20px 0;
+}
+.note p{margin-bottom:0}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.92rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--accent);font-size:.85rem}
+.table-scroll{overflow-x:auto}
+
+.case-foot{
+  border-top:1px solid var(--line);padding:32px 0 48px;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;
+}
+.case-foot a{font-weight:600;text-decoration:none}
+footer{padding:0 0 36px;color:var(--ink-soft);font-size:.85rem;text-align:center}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-name" href="../index.html">Ahmed El Ghrairi</a>
+    <div class="nav-links">
+      <a href="../index.html#projets">Projets</a>
+      <a href="../index.html#veille">Veille</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="case-head">
+  <div class="wrap">
+    <p class="kicker">Étude de cas · ACP et clustering · Conseil stratégique</p>
+    <h1>Quels pays cibler pour s'implanter à l'international ? Segmenter 165 marchés pour répondre à une direction</h1>
+    <p class="lede">Une entreprise avicole veut exporter et demande où aller en priorité. J'ai croisé quatre sources publiques, construit neuf indicateurs de marché, réduit leur complexité par une analyse en composantes principales, puis segmenté les pays par deux méthodes de clustering pour livrer une recommandation défendable devant un comité de direction non technique.</p>
+    <div class="case-links">
+      <a class="btn btn-primary" href="https://github.com/ahmedelghrairi/etude-marche-international-acp-clustering" target="_blank" rel="noopener">Voir le code sur GitHub</a>
+      <a class="btn btn-ghost" href="../index.html#projets">Tous les projets</a>
+    </div>
+    <p class="tools-line">Python · pandas · scikit-learn · scipy · matplotlib et seaborn · country_converter · Jupyter</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="facts">
+    <div class="fact"><p class="n">165 pays</p><p class="l">couvrant 96 % de la population mondiale</p></div>
+    <div class="fact"><p class="n">9 variables</p><p class="l">construites à partir de 4 sources publiques</p></div>
+    <div class="fact"><p class="n">73 %</p><p class="l">de l'information conservée en 3 composantes principales</p></div>
+    <div class="fact"><p class="n">4 groupes</p><p class="l">de marchés, confirmés par deux méthodes indépendantes</p></div>
+  </div>
+</div>
+
+<article class="wrap">
+
+  <h2>Le contexte et le besoin métier</h2>
+  <p>Le dirigeant d'une entreprise avicole veut se développer à l'international et pose une question simple en apparence : vers quels pays exporter en priorité ? Il n'y a ni liste de marchés à évaluer, ni critères imposés. Tout est à construire, du choix des données jusqu'à la recommandation finale, qui sera présentée à un comité de direction dont la plupart des membres ne sont pas techniciens.</p>
+  <p>Le vrai enjeu n'est donc pas de faire tourner un algorithme, c'est de transformer une question stratégique ouverte en une méthode défendable, puis de rendre le résultat compréhensible par des décideurs. C'est le projet où je me suis le plus rapproché d'une posture de consultant.</p>
+
+  <h2>Les données : sources, qualité, limites</h2>
+  <p>Pour ne pas réduire un marché à sa seule consommation alimentaire, je suis parti d'une grille PESTEL afin de couvrir plusieurs dimensions : politique, économique et sociale. Quatre sources publiques croisées, la FAO pour l'alimentation et la population, la Banque mondiale pour le PIB par habitant et l'indicateur de stabilité politique. Neuf variables construites : population, croissance démographique sur dix-sept ans, calories et protéines disponibles par habitant, part des protéines d'origine animale, consommation de volaille par habitant, taux de dépendance aux importations, PIB par habitant, stabilité politique.</p>
+  <p>La difficulté technique n'était pas le calcul mais le rapprochement des sources : chaque organisme nomme les pays à sa façon. Plutôt que de fusionner sur les libellés, source classique d'erreurs silencieuses, j'ai converti les identifiants FAO en codes ISO3 pour relier les tables sur une clé fiable, en traitant les rares cas particuliers un par un plutôt qu'en les supprimant en bloc.</p>
+  <p>Résultat : 165 pays sans aucune donnée manquante, couvrant 96 % de la population mondiale, là où le cadrage demandait au moins 100 pays et 60 %. Les valeurs atypiques, géants démographiques, pays très riches, petits territoires important plus qu'ils ne produisent, ont été conservées volontairement : ce ne sont pas des erreurs de saisie mais des réalités de marché, et les exclure aurait retiré de l'analyse les cas les plus intéressants commercialement.</p>
+
+  <h2>La démarche</h2>
+  <p>Neuf variables corrélées entre elles ne se lisent pas directement. L'analyse en composantes principales sert à résumer cette information en quelques axes de lecture. Le premier axe, qui concentre 48 % de l'information, s'interprète clairement : c'est un axe de développement, où richesse, stabilité politique, consommation de protéines animales et de volaille vont ensemble, à l'opposé de la forte croissance démographique. Le deuxième distingue les géants démographiques des petits territoires dépendants des importations. J'ai retenu trois composantes, soit 73 % de l'information conservée, en croisant trois critères plutôt qu'un seul : le coude de l'éboulis, la variance cumulée et le critère de Kaiser.</p>
+  <p>Un constat de la projection a orienté la suite : les pays forment un dégradé continu plutôt que des groupes visuellement séparés. Le nombre de segments ne pouvait donc pas se décider à l'œil, il fallait des méthodes dédiées.</p>
+  <p>J'ai appliqué deux techniques de clustering indépendantes, puis comparé leurs résultats par un tableau croisé. C'est une façon de tester la solidité d'une segmentation : si deux logiques différentes aboutissent au même découpage, le résultat n'est pas un artefact de méthode.</p>
+  <div class="table-scroll">
+  <table>
+    <tr><th>Groupe</th><th>Taille</th><th>Profil</th></tr>
+    <tr><td>Pays développés</td><td>43 pays</td><td>PIB moyen d'environ 40 000 $, 33 kg de volaille par habitant et par an, stabilité politique positive, forte ouverture aux importations</td></tr>
+    <tr><td>Pays intermédiaires</td><td>63 pays</td><td>Revenu moyen d'environ 7 500 $, consommation modérée, position moyenne sur tous les critères</td></tr>
+    <tr><td>Pays en développement</td><td>57 pays</td><td>PIB d'environ 2 150 $, forte croissance démographique, faible consommation de volaille</td></tr>
+    <tr><td>Géants démographiques</td><td>2 pays</td><td>Chine et Inde, isolées par les deux méthodes en raison d'une échelle sans équivalent</td></tr>
+  </table>
+  </div>
+  <div class="note">
+    <p><strong>Ce que la comparaison a montré.</strong> Les deux méthodes s'accordent sur les cas nets : la Chine et l'Inde isolées à l'identique, les 57 pays en développement regroupés de la même façon, le noyau des pays développés classé pareillement. Les désaccords portent uniquement sur les pays intermédiaires, ceux qui sont à la frontière entre deux groupes. C'est exactement ce qu'on attend, et c'est une information utile en soi : ces pays-là méritent un examen au cas par cas plutôt qu'une décision automatique.</p>
+  </div>
+
+  <h2>Les résultats et la recommandation</h2>
+  <p>Un seul groupe réunit les quatre conditions d'un marché premium : le pouvoir d'achat, une consommation de volaille déjà installée, la stabilité politique qui limite le risque commercial, et l'ouverture aux importations qui rend le marché accessible. C'est le groupe des pays développés, et c'est celui que je recommande de cibler.</p>
+  <p>Les autres groupes sont écartés pour des raisons explicites, ce qui compte autant que le choix lui-même : les pays en développement n'ont pas le pouvoir d'achat pour un produit premium, les pays intermédiaires ne se distinguent sur aucun critère, et les deux géants démographiques cumulent une faible consommation de volaille et une stabilité négative, malgré leur taille attirante.</p>
+  <p>Au sein du groupe cible, j'ai identifié des priorités en croisant l'attractivité du marché et la faisabilité logistique : les États-Unis, l'Australie, le Canada, la Nouvelle-Zélande et Israël, ainsi que plusieurs marchés européens proches. J'ai aussi signalé un cas à traiter avec prudence, l'Arabie saoudite : grosse consommatrice de volaille, mais avec un indicateur de stabilité plus faible. Signaler ce genre de nuance vaut mieux que de livrer une liste sans réserve.</p>
+
+  <h2>Les limites et les prochaines pistes</h2>
+  <p>Les données décrivent une année, celle où toutes les sources étaient complètes : l'étude est une photographie, pas une tendance. Le clustering décrit des ressemblances entre pays, il ne prédit aucun succès commercial : c'est un outil de priorisation qui réduit un choix de 165 possibilités à une poignée de candidats, la décision reste à la direction. Les valeurs atypiques conservées volontairement influencent la formation des groupes, c'est un arbitrage assumé.</p>
+  <p>Ce qu'une étude d'implantation réelle exigerait ensuite, et que ce jeu de données ne contient pas : droits de douane et accords commerciaux, coûts et délais logistiques, concurrence locale déjà en place, normes sanitaires à l'import. La suite naturelle serait d'approfondir les cinq à dix pays retenus sur ces critères, avec des données de marché plus fines.</p>
+
+</article>
+
+<div class="wrap case-foot">
+  <a href="../index.html#projets">Retour aux projets</a>
+  <a href="https://github.com/ahmedelghrairi/etude-marche-international-acp-clustering" target="_blank" rel="noopener">Le dépôt GitHub du projet</a>
+</div>
+
+<footer>
+  <p>Ahmed El Ghrairi, 2026.</p>
+</footer>
+
+</body>
+</html>
