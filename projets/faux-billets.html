@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Détection de faux billets | Ahmed El Ghrairi</title>
+<meta name="description" content="Étude de cas : classification supervisée pour détecter les faux billets à partir de leurs dimensions, avec seuil de décision optimisé et application livrée en script autonome.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c2331;
+  --ink-soft:#4a5468;
+  --bg:#faf8f4;
+  --card:#ffffff;
+  --accent:#1f4e79;
+  --accent-soft:#e8eff6;
+  --line:#e5e1d8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.7;font-size:16px;
+}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.25}
+a{color:var(--accent)}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px}
+
+nav{
+  position:sticky;top:0;z-index:10;
+  background:rgba(250,248,244,.92);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:1000px;margin:0 auto;padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
+}
+.nav-name{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.nav-links{display:flex;gap:20px;flex-wrap:wrap}
+.nav-links a{color:var(--ink-soft);text-decoration:none;font-size:.92rem;font-weight:500}
+.nav-links a:hover{color:var(--accent)}
+
+.case-head{padding:56px 0 36px;border-bottom:1px solid var(--line)}
+.case-head .kicker{color:var(--accent);font-weight:600;letter-spacing:.05em;text-transform:uppercase;font-size:.78rem}
+.case-head h1{font-size:2.1rem;margin:8px 0 14px}
+.case-head .lede{color:var(--ink-soft);font-size:1.05rem;max-width:680px}
+.case-links{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:9px 18px;border-radius:8px;text-decoration:none;
+  font-weight:600;font-size:.9rem;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+.tools-line{margin-top:18px;color:var(--ink-soft);font-size:.88rem}
+
+.facts{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;
+  margin:36px 0 8px;
+}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.fact .n{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.45rem;color:var(--accent)}
+.fact .l{color:var(--ink-soft);font-size:.85rem;margin-top:4px}
+
+article{padding:16px 0 56px}
+article h2{font-size:1.45rem;margin:40px 0 14px}
+article p{margin-bottom:14px}
+article ul{margin:0 0 14px 22px}
+article li{margin-bottom:8px}
+.note{
+  background:var(--accent-soft);border-left:4px solid var(--accent);
+  border-radius:0 10px 10px 0;padding:16px 20px;margin:20px 0;
+}
+.note p{margin-bottom:0}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.92rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--accent);font-size:.85rem}
+.table-scroll{overflow-x:auto}
+
+.case-foot{
+  border-top:1px solid var(--line);padding:32px 0 48px;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;
+}
+.case-foot a{font-weight:600;text-decoration:none}
+footer{padding:0 0 36px;color:var(--ink-soft);font-size:.85rem;text-align:center}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-name" href="../index.html">Ahmed El Ghrairi</a>
+    <div class="nav-links">
+      <a href="../index.html#projets">Projets</a>
+      <a href="../index.html#veille">Veille</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="case-head">
+  <div class="wrap">
+    <p class="kicker">Étude de cas · Machine learning · Classification</p>
+    <h1>Détecter les faux billets à partir de six mesures, et livrer une application qui le fait toute seule</h1>
+    <p class="lede">Pour un organisme de lutte contre le faux-monnayage, j'ai construit et comparé quatre modèles de classification, réglé le seuil de décision sur un critère de coût métier, puis livré l'algorithme dans un script autonome utilisable par des équipes non techniques.</p>
+    <div class="case-links">
+      <a class="btn btn-primary" href="https://github.com/ahmedelghrairi/detection-faux-billets-machine-learning" target="_blank" rel="noopener">Voir le code sur GitHub</a>
+      <a class="btn btn-ghost" href="../index.html#projets">Tous les projets</a>
+    </div>
+    <p class="tools-line">Python · pandas · scikit-learn · matplotlib et seaborn · joblib · Jupyter</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="facts">
+    <div class="fact"><p class="n">1 500</p><p class="l">billets mesurés : 1 000 vrais, 500 faux</p></div>
+    <div class="fact"><p class="n">4</p><p class="l">algorithmes comparés : régression logistique, KNN, random forest, k-means</p></div>
+    <div class="fact"><p class="n">100 %</p><p class="l">des faux billets du jeu de test détectés au seuil retenu</p></div>
+    <div class="fact"><p class="n">0,85</p><p class="l">seuil de décision choisi par un raisonnement de coût, pas par défaut</p></div>
+  </div>
+</div>
+
+<article class="wrap">
+
+  <h2>Le contexte et le besoin métier</h2>
+  <p>L'ONCFM, organisme de lutte contre le faux-monnayage, dispose d'une machine qui mesure automatiquement six dimensions géométriques sur chaque billet contrôlé : longueur, hauteurs gauche et droite, marges haute et basse, diagonale. Les différences entre vrais et faux billets sont invisibles à l'œil nu, mais mesurables. La mission : construire un algorithme qui prédit la nature d'un billet à partir de ces seules mesures, comparer quatre méthodes imposées par le cahier des charges, et livrer une application fonctionnelle dans un script séparé du notebook d'analyse.</p>
+  <p>Le critère métier est énoncé clairement : identifier un maximum de faux billets. Un faux billet qui passe coûte plus cher qu'une fausse alerte. Cette phrase, en apparence anodine, a guidé la décision la plus importante du projet.</p>
+
+  <h2>Les données : sources, qualité, limites</h2>
+  <p>Un fichier de 1 500 billets déjà étiquetés, 1 000 vrais et 500 faux, avec les six mesures en millimètres. Le contrôle qualité d'entrée : aucun doublon, des valeurs toutes plausibles, mais 37 mesures manquantes sur la marge basse, soit 2,5 % des billets. Avant de les compléter, j'ai vérifié que ces trous ne cachaient pas d'information : un test statistique confirme que l'écart de taux de lignes incomplètes entre vrais et faux billets peut venir du hasard. Les valeurs sont donc complétées par régression linéaire sur les cinq autres mesures, plutôt que supprimées ou remplacées par une moyenne aveugle.</p>
+  <p>Limite structurelle à garder en tête : le modèle n'apprend que les procédés de contrefaçon présents dans ce fichier. Un procédé nouveau demanderait de nouvelles données et un réentraînement.</p>
+
+  <h2>La démarche</h2>
+  <p>L'exploration révèle l'essentiel avant tout modèle : les faux billets sont en moyenne plus courts et présentent une marge basse plus grande. Deux variables, la longueur et la marge basse, portent l'essentiel du signal, ce que le random forest confirmera plus tard en leur attribuant 81 % de l'importance à elles deux.</p>
+  <p>Après séparation stricte entre 1 200 billets d'entraînement et 300 billets de test jamais vus, et standardisation des mesures, les quatre modèles demandés sont mis en concurrence, chacun évalué par sa matrice de confusion :</p>
+  <div class="table-scroll">
+  <table>
+    <tr><th>Modèle</th><th>Type</th><th>Constat</th></tr>
+    <tr><td>Régression logistique</td><td>Supervisé</td><td>99 % de bonnes réponses sur le jeu de test</td></tr>
+    <tr><td>KNN (k choisi par validation croisée)</td><td>Supervisé</td><td>Matrice de confusion identique à la régression</td></tr>
+    <tr><td>Random forest</td><td>Supervisé</td><td>Performances équivalentes, apporte l'importance des variables</td></tr>
+    <tr><td>K-means</td><td>Non supervisé</td><td>Retrouve deux groupes proches des vraies classes, mais reste en retrait ; utile pour dresser le portrait type du faux billet</td></tr>
+  </table>
+  </div>
+  <p>Trois modèles à égalité parfaite : les chiffres seuls ne tranchent pas. J'ai départagé par validation croisée, puis par des critères pratiques : la régression logistique est la plus simple, la plus interprétable, et fournit des probabilités exploitables. C'est elle que je retiens.</p>
+  <div class="note">
+    <p><strong>La décision qui change tout : le seuil.</strong> Un modèle de classification tranche par défaut à 50 % de probabilité. Rien n'oblige à garder ce réglage. J'ai posé une règle de coût inspirée du besoin métier, un faux billet manqué vaut cinq vérifications manuelles, puis cherché le seuil qui minimise ce coût, sans toucher au jeu de test. Résultat : à 0,85, le modèle attrape les 100 faux billets du jeu de test sans en laisser passer un seul, au prix de 5 fausses alertes. Au seuil par défaut, deux faux billets passaient. J'ai échangé quatre vérifications manuelles contre zéro faux billet en circulation.</p>
+  </div>
+
+  <h2>Les résultats et l'impact</h2>
+  <p>Le livrable final n'est pas un chiffre de performance, c'est une application. Le pipeline complet, imputation des mesures manquantes, standardisation, modèle et seuil, est sauvegardé dans un seul fichier, et un script autonome l'exploite : on lui donne un fichier CSV de billets scannés, ou les six mesures au clavier, et il rend pour chaque billet une probabilité et un verdict. Le script encaisse les cas réels : séparateur de fichier variable, virgule décimale des exports français, identifiants absents, mesure manquante.</p>
+  <p>Sur le fichier de production fourni pour le test final, l'application identifie 3 faux billets sur 5, cohérents avec le portrait établi par l'analyse : des billets courts, à la marge basse trop grande. Et l'analyse fournit aux équipes un résultat lisible au-delà du modèle : le faux billet type se reconnaît à sa longueur et à sa marge basse, les deux mesures que les faussaires ratent le plus.</p>
+
+  <h2>Les limites et les prochaines pistes</h2>
+  <p>Trois limites documentées dans le notebook. L'imputation des valeurs manquantes a d'abord été ajustée sur l'ensemble du fichier avant la séparation entraînement / test : sur 2,5 % des lignes l'effet est négligeable, je l'ai identifié en cours d'analyse, documenté, et le pipeline final livré refait l'imputation proprement. L'hypothèse de coût derrière le seuil de 0,85 mérite d'être validée avec le métier : c'est une décision qui appartient à l'ONCFM, mon travail est de la rendre explicite et réglable. Enfin, le modèle vieillira avec les procédés de contrefaçon : un suivi des prédictions en production et un réentraînement périodique s'imposeront.</p>
+
+</article>
+
+<div class="wrap case-foot">
+  <a href="../index.html#projets">Retour aux projets</a>
+  <a href="https://github.com/ahmedelghrairi/detection-faux-billets-machine-learning" target="_blank" rel="noopener">Le dépôt GitHub du projet</a>
+</div>
+
+<footer>
+  <p>Ahmed El Ghrairi, 2026.</p>
+</footer>
+
+</body>
+</html>
