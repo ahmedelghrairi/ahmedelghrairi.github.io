@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accès à l'eau potable dans le monde | Ahmed El Ghrairi</title>
+<meta name="description" content="Étude de cas : tableau de bord Power BI à trois vues sur l'accès mondial à l'eau potable, pour cibler l'aide au développement d'une ONG.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c2331;
+  --ink-soft:#4a5468;
+  --bg:#faf8f4;
+  --card:#ffffff;
+  --accent:#1f4e79;
+  --accent-soft:#e8eff6;
+  --line:#e5e1d8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.7;font-size:16px;
+}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.25}
+a{color:var(--accent)}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px}
+
+nav{
+  position:sticky;top:0;z-index:10;
+  background:rgba(250,248,244,.92);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:1000px;margin:0 auto;padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
+}
+.nav-name{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.nav-links{display:flex;gap:20px;flex-wrap:wrap}
+.nav-links a{color:var(--ink-soft);text-decoration:none;font-size:.92rem;font-weight:500}
+.nav-links a:hover{color:var(--accent)}
+
+.case-head{padding:56px 0 36px;border-bottom:1px solid var(--line)}
+.case-head .kicker{color:var(--accent);font-weight:600;letter-spacing:.05em;text-transform:uppercase;font-size:.78rem}
+.case-head h1{font-size:2.1rem;margin:8px 0 14px}
+.case-head .lede{color:var(--ink-soft);font-size:1.05rem;max-width:680px}
+.case-links{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:9px 18px;border-radius:8px;text-decoration:none;
+  font-weight:600;font-size:.9rem;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+.tools-line{margin-top:18px;color:var(--ink-soft);font-size:.88rem}
+
+.facts{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;
+  margin:36px 0 8px;
+}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.fact .n{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.45rem;color:var(--accent)}
+.fact .l{color:var(--ink-soft);font-size:.85rem;margin-top:4px}
+
+article{padding:16px 0 56px}
+article h2{font-size:1.45rem;margin:40px 0 14px}
+article p{margin-bottom:14px}
+article ul{margin:0 0 14px 22px}
+article li{margin-bottom:8px}
+.note{
+  background:var(--accent-soft);border-left:4px solid var(--accent);
+  border-radius:0 10px 10px 0;padding:16px 20px;margin:20px 0;
+}
+.note p{margin-bottom:0}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.92rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--accent);font-size:.85rem}
+.table-scroll{overflow-x:auto}
+
+.case-foot{
+  border-top:1px solid var(--line);padding:32px 0 48px;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;
+}
+.case-foot a{font-weight:600;text-decoration:none}
+footer{padding:0 0 36px;color:var(--ink-soft);font-size:.85rem;text-align:center}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-name" href="../index.html">Ahmed El Ghrairi</a>
+    <div class="nav-links">
+      <a href="../index.html#projets">Projets</a>
+      <a href="../index.html#veille">Veille</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="case-head">
+  <div class="wrap">
+    <p class="kicker">Étude de cas · Business intelligence · Power BI</p>
+    <h1>Où concentrer l'aide au développement ? Un tableau de bord pour cibler l'accès à l'eau potable</h1>
+    <p class="lede">Une ONG doit choisir dans quel pays investir un financement, sans savoir encore lequel de ses trois domaines d'expertise sera retenu par le bailleur de fonds. J'ai construit un tableau de bord Power BI à trois échelles de lecture, du monde jusqu'au pays, pour que la décision se prenne sur des chiffres plutôt que sur une intuition.</p>
+    <div class="case-links">
+      <a class="btn btn-primary" href="https://github.com/ahmedelghrairi/acces-eau-potable-dashboard-powerbi" target="_blank" rel="noopener">Voir le code sur GitHub</a>
+      <a class="btn btn-ghost" href="../index.html#projets">Tous les projets</a>
+    </div>
+    <p class="tools-line">Python · pandas · Power Query · Power BI · DAX</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="facts">
+    <div class="fact"><p class="n">194 pays</p><p class="l">suivis de 2000 à 2018, à partir de cinq sources croisées</p></div>
+    <div class="fact"><p class="n">3 vues</p><p class="l">mondiale, continentale, nationale, reliées par une navigation</p></div>
+    <div class="fact"><p class="n">84,3 %</p><p class="l">d'accès basique à l'eau potable dans le monde</p></div>
+    <div class="fact"><p class="n">35 points</p><p class="l">d'écart d'accès basique entre l'Europe et l'Afrique</p></div>
+  </div>
+</div>
+
+<article class="wrap">
+
+  <h2>Le contexte et le besoin métier</h2>
+  <p>DWFA (Drinking Water For All) est une ONG qui vise l'accès universel à l'eau potable, autour de trois domaines d'expertise : créer des services d'accès à l'eau là où il n'y en a pas, moderniser des services existants, ou faire du consulting auprès de gouvernements sur leurs politiques de l'eau. L'association a déposé une demande de financement auprès d'un bailleur de fonds. Si elle est acceptée, elle pourra investir dans un de ces trois domaines, dans un pays encore à déterminer.</p>
+  <p>Le chef de mission m'a confié la construction d'un tableau de bord pour préparer cette décision avant même de savoir quel domaine sera financé : identifier les pays en difficulté d'accès à l'eau potable, et parmi eux, ceux sur lesquels concentrer l'effort. Trois vues sont demandées, du général au particulier, pour que le dashboard reste utile quel que soit le niveau de décision, mondial pour cadrer, continental pour comparer, national pour trancher.</p>
+
+  <h2>Les données : sources, qualité, limites</h2>
+  <p>Cinq fichiers croisés sur la période 2000-2018, autour d'une table de référence de 194 pays associés à leur région (OMS/UNICEF) : la population par pays (FAO), l'accès à l'eau basique et l'accès à l'eau gérée en sécurité en pourcentage (OMS), la mortalité attribuée à l'eau insalubre (OMS, une seule année disponible, 2016), et l'indice de stabilité politique (Banque mondiale).</p>
+  <p>Le vrai travail de nettoyage n'était pas dans les valeurs mais dans les noms de pays : chaque source orthographie certains pays à sa façon. Pour chaque fichier, j'ai comparé l'ensemble de ses pays à la table de référence dans les deux sens, ce qui distingue les vrais désaccords à corriger des territoires simplement hors périmètre. Deux renommages nécessaires au total, North Macedonia sur deux fichiers et China, mainland sur un troisième, chacun vérifié avant correction. Le cas chinois demandait une vérification particulière : une des variantes disponibles était déjà un total national, l'additionner aux autres aurait doublé la population comptée.</p>
+  <div class="note">
+    <p><strong>Pourquoi je n'ai jamais remplacé une valeur manquante par zéro.</strong> Sur le taux d'accès à l'eau gérée en sécurité, 7 190 valeurs sont absentes faute de mesure dans certains pays. Calculée en ignorant ces trous, la moyenne mondiale ressort à 66 %. Calculée en les remplaçant par zéro, elle tombe à 21 %. Un pays sans donnée n'est pas un pays sans accès à l'eau : c'est une information qui manque, pas une valeur nulle. C'est la règle que j'ai appliquée sur les cinq fichiers.</p>
+  </div>
+  <p>Limite assumée : la mortalité liée à l'eau insalubre n'existe que pour 2016, ce qui fige à cette seule année toute analyse qui la croise avec un autre indicateur. Et une dizaine de micro-États, Monaco, Saint-Marin, et quelques autres, n'apparaissent pas dans certaines sources : un trou de collecte à l'origine, documenté plutôt que masqué.</p>
+
+  <h2>La démarche</h2>
+  <p>Deux outils, deux rôles bien séparés. Python et pandas pour le nettoyage analytique, l'audit des cinq fichiers, les comparaisons de noms de pays, les décisions de renommage. Power Query ensuite, à l'import dans Power BI, pour la mise en forme technique : promotion des en-têtes, typage explicite de chaque colonne, paramètres régionaux fixés pour que les décimales se lisent correctement. Les fichiers sources ne sont jamais modifiés, seules des copies nettoyées circulent.</p>
+  <p>Le modèle de données suit un schéma en étoile : la table pays/région au centre, reliée à quatre tables de faits par des relations à sens unique, plus une table Calendrier dédiée pour l'axe temporel plutôt qu'une génération jour par jour, inutilement lourde pour une analyse annuelle. Sept mesures DAX réutilisables, plus une mesure population rurale, avec un filtre systématique sur la granularité "Total" pour ne jamais compter un pays plusieurs fois entre ses déclinaisons urbaine, rurale, masculine ou féminine.</p>
+  <p>Le choix de l'outil n'allait pas de soi : mes prédécesseurs sur ce type de mission utilisaient Tableau. J'ai retenu Power BI pour six raisons concrètes, l'interactivité native par filtres et slicers, le langage DAX pour des mesures qui s'adaptent au contexte sans dupliquer de graphiques, la cartographie choroplèthe intégrée sans outil tiers, un modèle relationnel qui propage proprement les filtres, des fonctions d'accessibilité déjà intégrées, et le fait que ce soit un standard d'entreprise qui facilite le partage.</p>
+  <p>Chaque vue répond directement aux trois domaines d'expertise de DWFA plutôt que de les illustrer en passant : sur la vue continentale, un premier nuage de points croise l'accès à l'eau et le taux d'urbanisation, utile pour décider où créer un service. Un deuxième croise l'accès basique et l'accès de qualité, pour repérer les pays où moderniser plutôt que construire. Un troisième croise un score d'efficacité de la politique de l'eau, calculé comme l'accès basique moins le taux de mortalité, avec la stabilité politique, parce qu'une mission de consulting suppose un interlocuteur institutionnel stable. Un filtre de stabilité, réglable par l'utilisateur, permet d'exclure les pays jugés trop instables de l'analyse.</p>
+
+  <h2>Les résultats et l'impact</h2>
+  <p>La vue mondiale pose le cadre : 84,3 % d'accès basique à l'eau potable en moyenne dans le monde, mais seulement 74,5 % en accès géré en sécurité, l'écart entre les deux étant la vraie marge de progression sur la qualité des services. La vue continentale révèle où se concentre le besoin : l'Europe affiche 96,8 % d'accès basique contre 62,1 % pour l'Afrique, un écart de 35 points qui se creuse encore sur l'accès de qualité, 84 % contre 19,1 %. Sur ce même continent, le taux de mortalité liée à l'eau insalubre atteint 38,9 pour 100 000 habitants en 2016, l'un des indicateurs qui justifierait un ciblage prioritaire si le domaine consulting est retenu.</p>
+  <p>La vue nationale démontre la granularité utile à la décision finale : sur la France, prise comme exemple, le dashboard affiche 99,96 % d'accès basique, 97,24 % d'accès sécurisé, un taux de mortalité de 0,27 et une population 2018 de 65,0 millions d'habitants, avec l'évolution de chaque indicateur depuis 2000. N'importe quel pays du périmètre s'affiche de la même façon en un clic, ce qui donne à DWFA un outil réellement utilisable dès que le bailleur aura tranché sur le domaine et la zone géographique, sans repasser par une nouvelle analyse.</p>
+
+  <h2>Les limites et les prochaines pistes</h2>
+  <p>Le tableau de bord priorise, il ne décide pas : il réduit 194 pays à une poignée de candidats plausibles par domaine, la décision finale reste à DWFA et à son bailleur. L'année unique de la mortalité, 2016, empêche toute lecture de tendance sur cet indicateur précis, contrairement à l'accès à l'eau ou à la population, suivis sur toute la période. Les corrélations visibles sur les nuages de points par domaine, entre urbanisation et accès par exemple, décrivent une association, pas une cause : un pays peut y échapper pour des raisons que le modèle ne capture pas.</p>
+  <p>Les pistes que je recommande : actualiser les cinq sources dès que l'OMS et la Banque mondiale publient de nouvelles années, ajouter une quatrième vue une fois le domaine et le pays confirmés par le bailleur, pour aller jusqu'au niveau infranational, et croiser les résultats avec des données de coût et de logistique d'intervention, absentes de ce périmètre mais nécessaires pour transformer une priorité en plan d'action chiffré.</p>
+
+</article>
+
+<div class="wrap case-foot">
+  <a href="../index.html#projets">Retour aux projets</a>
+  <a href="https://github.com/ahmedelghrairi/acces-eau-potable-dashboard-powerbi" target="_blank" rel="noopener">Le dépôt GitHub du projet</a>
+</div>
+
+<footer>
+  <p>Ahmed El Ghrairi, 2026.</p>
+</footer>
+
+</body>
+</html>
