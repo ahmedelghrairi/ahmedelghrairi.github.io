@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pilotage d'un portefeuille de projets | Ahmed El Ghrairi</title>
+<meta name="description" content="Étude de cas : tableau de bord Power BI pour piloter 104 projets IT et Marketing, avec alertes automatiques et trois niveaux de lecture par rôle.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c2331;
+  --ink-soft:#4a5468;
+  --bg:#faf8f4;
+  --card:#ffffff;
+  --accent:#1f4e79;
+  --accent-soft:#e8eff6;
+  --line:#e5e1d8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.7;font-size:16px;
+}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.25}
+a{color:var(--accent)}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px}
+
+nav{
+  position:sticky;top:0;z-index:10;
+  background:rgba(250,248,244,.92);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:1000px;margin:0 auto;padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
+}
+.nav-name{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.nav-links{display:flex;gap:20px;flex-wrap:wrap}
+.nav-links a{color:var(--ink-soft);text-decoration:none;font-size:.92rem;font-weight:500}
+.nav-links a:hover{color:var(--accent)}
+
+.case-head{padding:56px 0 36px;border-bottom:1px solid var(--line)}
+.case-head .kicker{color:var(--accent);font-weight:600;letter-spacing:.05em;text-transform:uppercase;font-size:.78rem}
+.case-head h1{font-size:2.1rem;margin:8px 0 14px}
+.case-head .lede{color:var(--ink-soft);font-size:1.05rem;max-width:680px}
+.case-links{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:9px 18px;border-radius:8px;text-decoration:none;
+  font-weight:600;font-size:.9rem;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+.tools-line{margin-top:18px;color:var(--ink-soft);font-size:.88rem}
+
+.facts{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;
+  margin:36px 0 8px;
+}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.fact .n{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.45rem;color:var(--accent)}
+.fact .l{color:var(--ink-soft);font-size:.85rem;margin-top:4px}
+
+article{padding:16px 0 32px}
+article h2{font-size:1.45rem;margin:40px 0 14px}
+article p{margin-bottom:14px}
+article ul{margin:0 0 14px 22px}
+article li{margin-bottom:8px}
+.note{
+  background:var(--accent-soft);border-left:4px solid var(--accent);
+  border-radius:0 10px 10px 0;padding:16px 20px;margin:20px 0;
+}
+.note p{margin-bottom:0}
+.shots{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
+.shots figure{margin:0}
+.shots img{width:100%;border-radius:10px;border:1px solid var(--line);display:block}
+.shots figcaption{font-size:.82rem;color:var(--ink-soft);margin-top:6px}
+@media (max-width:640px){.shots{grid-template-columns:1fr}}
+
+.case-foot{
+  border-top:1px solid var(--line);padding:32px 0 48px;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;
+}
+.case-foot a{font-weight:600;text-decoration:none}
+footer{padding:0 0 36px;color:var(--ink-soft);font-size:.85rem;text-align:center}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-name" href="../index.html">Ahmed El Ghrairi</a>
+    <div class="nav-links">
+      <a href="../index.html#projets">Projets</a>
+      <a href="../index.html#veille">Veille</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="case-head">
+  <div class="wrap">
+    <p class="kicker">Étude de cas · Data visualisation · Power BI</p>
+    <h1>Un portefeuille de 104 projets, trois directeurs, un seul tableau de bord</h1>
+    <p class="lede">Une entreprise internationale gère des dizaines de projets IT et Marketing sans vue d'ensemble fiable. En mission chez elle comme consultant, j'ai construit un tableau de bord Power BI capable de servir trois niveaux de direction différents à partir d'un seul rapport, avec des alertes automatiques plutôt qu'une lecture manuelle des écarts.</p>
+    <div class="case-links">
+      <a class="btn btn-primary" href="https://github.com/ahmedelghrairi/suivi-projets-dashboard-powerbi" target="_blank" rel="noopener">Voir le code sur GitHub</a>
+      <a class="btn btn-ghost" href="../index.html#projets">Tous les projets</a>
+    </div>
+    <p class="tools-line">Power BI Desktop · Power Query · DAX</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="facts">
+    <div class="fact"><p class="n">104 projets</p><p class="l">520 phases, sur 2018-2022, dans 52 pays</p></div>
+    <div class="fact"><p class="n">79,8 %</p><p class="l">des projets accusent un retard</p></div>
+    <div class="fact"><p class="n">100 % vs 48 %</p><p class="l">de projets IT et Marketing en alerte coût</p></div>
+    <div class="fact"><p class="n">3 rôles</p><p class="l">un seul rapport, filtré selon qui le consulte</p></div>
+  </div>
+</div>
+
+<article class="wrap">
+
+  <h2>Le contexte et le besoin métier</h2>
+  <p>Sanitoral, fabricant international de soins bucco-dentaires présent dans quatre grandes régions du monde, gère en permanence des dizaines de projets IT et Marketing, indépendants les uns des autres. Sophie, cheffe de projet au Project Management Office, dispose de beaucoup de données mais aucun moyen de les exploiter pour piloter l'activité. Le besoin est double : identifier les retards et dérives de performance assez tôt pour agir, et donner à trois niveaux de direction, le directeur général, les directeurs régionaux, les directeurs pays, une lecture adaptée à leur périmètre sans multiplier les rapports.</p>
+
+  <h2>Les données : sources, qualité, limites</h2>
+  <p>Sept tables extraites du logiciel de gestion de projets de Sanitoral : le planning prévisionnel de chaque phase (coût, durée, livrables), les réalisations effectives sur ces trois mêmes axes, le type de projet, et la localisation géographique avec région et statut du pays. 104 projets, 520 phases au total : les projets IT suivent six phases nommées A à F, les projets Marketing quatre phases numérotées de 1 à 4, deux cycles qui ne se succèdent jamais et ne doivent surtout pas être confondus dans l'analyse.</p>
+  <div class="note">
+    <p><strong>Avant le tableau de bord, un Product Strategy Canvas.</strong> La consigne du client est explicite : ne pas se lancer dans l'outil avant d'avoir formalisé et fait valider le besoin. Neuf user stories réparties sur les trois profils de directeurs ont été rédigées et validées par Sophie avant toute construction dans Power BI, pour ne pas découvrir en cours de route qu'une fonctionnalité attendue a été oubliée.</p>
+  </div>
+  <p>Limite assumée : certains pays ne comptent qu'un ou deux projets sur toute la période, ce qui rend les taux d'alerte par pays statistiquement fragiles à ce niveau de détail. Les lectures par région et par type de projet, sur des effectifs plus larges, sont plus robustes.</p>
+
+  <h2>La démarche</h2>
+  <p>Le client a demandé une mise à jour hebdomadaire des données : le nettoyage devait donc être automatisable, pas fait à la main à chaque fois. Chaque table passe par les mêmes étapes rejouables dans Power Query, promotion des en-têtes, typage des colonnes, suppression des lignes vides. Une colonne calculée <code>Id_Phase</code>, qui concatène l'identifiant du projet et le nom de la phase, sert de clé unique pour relier les tables de réalisations au planning initial : sans elle, impossible de savoir si une "Phase 1" appartient au projet 12 ou au projet 87.</p>
+  <div class="shots">
+    <figure><img src="https://raw.githubusercontent.com/ahmedelghrairi/suivi-projets-dashboard-powerbi/main/captures/nettoyage_power_query_1.png" alt="Étapes de nettoyage Power Query, création de la clé Id_Phase"><figcaption>Power Query : création de la clé Id_Phase à partir de l'identifiant projet et de la phase.</figcaption></figure>
+    <figure><img src="https://raw.githubusercontent.com/ahmedelghrairi/suivi-projets-dashboard-powerbi/main/captures/modele_relationnel.png" alt="Modèle relationnel du tableau de bord"><figcaption>Modèle en étoile : la table de planning centralise les mesures DAX d'écart et d'alerte.</figcaption></figure>
+  </div>
+  <p>Le modèle de données suit un schéma en étoile autour de la table de planning, qui centralise les mesures DAX d'écart et d'alerte, reliée aux trois tables de réalisation sur la clé <code>Id_Phase</code>, et à la géographie et au type de projet sur l'identifiant du projet. Le seuil d'alerte, 15 % d'écart entre prévu et réalisé sur le coût, le délai ou les livrables, est une mesure DAX unique réutilisée sur toutes les pages, jamais recalculée localement.</p>
+  <p>Plutôt que de dupliquer les pages pour chaque niveau de direction, des rôles de sécurité filtrent les mêmes visuels selon le profil qui consulte le rapport : le directeur général voit l'ensemble du portefeuille, un directeur régional ne voit que les projets de sa région, un directeur pays que ceux de son pays. Un seul tableau de bord à maintenir plutôt que trois versions séparées à faire évoluer en parallèle.</p>
+
+  <h2>Les résultats et l'impact</h2>
+  <div class="shots">
+    <figure><img src="https://raw.githubusercontent.com/ahmedelghrairi/suivi-projets-dashboard-powerbi/main/captures/dashboard_accueil.png" alt="Page d'accueil du tableau de bord, vue d'ensemble 2018-2022"><figcaption>Vue d'ensemble : 79,8 % des projets en retard, 74 % en dépassement de coût.</figcaption></figure>
+    <figure><img src="https://raw.githubusercontent.com/ahmedelghrairi/suivi-projets-dashboard-powerbi/main/captures/dashboard_suivi_couts.png" alt="Page de suivi des coûts prévu vs réel"><figcaption>Suivi des coûts : 56,1 M€ prévus contre 60,2 M€ réels, détail par projet.</figcaption></figure>
+  </div>
+  <p>Sur l'ensemble du portefeuille, 79,8 % des projets accusent un retard, 74 % dépassent leur budget, et 45,2 % sont en alerte sur leurs livrables. Le coût total dérive de 7,3 % à l'échelle du portefeuille, un chiffre modéré en apparence qui masque des écarts extrêmes au niveau de certaines phases, certaines dépassant 400 % de leur budget initial.</p>
+  <p>Le signal le plus exploitable n'est pas géographique mais lié au type de projet : 100 % des projets IT, 52 sur 52, sont en alerte coût, contre 48 % des projets Marketing. C'est l'axe stratégique que je retiens pour la direction : adapter le pilotage et les marges de prévision selon le type de projet, plutôt que d'appliquer un contrôle budgétaire uniforme qui sous-estime systématiquement le risque réel des projets IT.</p>
+
+  <h2>Les limites et les prochaines pistes</h2>
+  <p>Le tableau de bord signale les écarts, il n'en diagnostique pas la cause : savoir que les projets IT dépassent leur budget neuf fois sur dix ne dit pas encore pourquoi, sous-estimation initiale des coûts, complexité technique mal anticipée, ou fournisseurs mal négociés. Les alertes par pays restent à manier avec prudence tant que le nombre de projets par pays reste aussi limité.</p>
+  <p>Les pistes que je recommande : un audit qualitatif des budgets initiaux des projets IT pour vérifier s'ils sont structurellement sous-évalués, un suivi resserré des phases à très fort dépassement plutôt qu'un traitement uniforme du seuil de 15 %, et l'ajout d'un historique d'alertes dans le temps pour voir si les mesures correctives prises par les directeurs améliorent effectivement le taux de réussite d'une année sur l'autre.</p>
+
+</article>
+
+<div class="wrap case-foot">
+  <a href="../index.html#projets">Retour aux projets</a>
+  <a href="https://github.com/ahmedelghrairi/suivi-projets-dashboard-powerbi" target="_blank" rel="noopener">Le dépôt GitHub du projet</a>
+</div>
+
+<footer>
+  <p>Ahmed El Ghrairi, 2026.</p>
+</footer>
+
+</body>
+</html>
