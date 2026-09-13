@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BottleNeck : rapprochement et analyse des ventes et du stock | Ahmed El Ghrairi</title>
+<meta name="description" content="Étude de cas : rapprochement de trois exports non reliés pour un marchand de vin en ligne, chiffre d'affaires, stock, marges et corrélations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c2331;
+  --ink-soft:#4a5468;
+  --bg:#faf8f4;
+  --card:#ffffff;
+  --accent:#1f4e79;
+  --accent-soft:#e8eff6;
+  --line:#e5e1d8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.7;font-size:16px;
+}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.25}
+a{color:var(--accent)}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px}
+
+nav{
+  position:sticky;top:0;z-index:10;
+  background:rgba(250,248,244,.92);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:1000px;margin:0 auto;padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
+}
+.nav-name{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.nav-links{display:flex;gap:20px;flex-wrap:wrap}
+.nav-links a{color:var(--ink-soft);text-decoration:none;font-size:.92rem;font-weight:500}
+.nav-links a:hover{color:var(--accent)}
+
+.case-head{padding:56px 0 36px;border-bottom:1px solid var(--line)}
+.case-head .kicker{color:var(--accent);font-weight:600;letter-spacing:.05em;text-transform:uppercase;font-size:.78rem}
+.case-head h1{font-size:2.1rem;margin:8px 0 14px}
+.case-head .lede{color:var(--ink-soft);font-size:1.05rem;max-width:680px}
+.case-links{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:9px 18px;border-radius:8px;text-decoration:none;
+  font-weight:600;font-size:.9rem;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+.tools-line{margin-top:18px;color:var(--ink-soft);font-size:.88rem}
+
+.facts{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;
+  margin:36px 0 8px;
+}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.fact .n{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.45rem;color:var(--accent)}
+.fact .l{color:var(--ink-soft);font-size:.85rem;margin-top:4px}
+
+article{padding:16px 0 56px}
+article h2{font-size:1.45rem;margin:40px 0 14px}
+article p{margin-bottom:14px}
+article ul{margin:0 0 14px 22px}
+article li{margin-bottom:8px}
+.note{
+  background:var(--accent-soft);border-left:4px solid var(--accent);
+  border-radius:0 10px 10px 0;padding:16px 20px;margin:20px 0;
+}
+.note p{margin-bottom:0}
+
+.case-foot{
+  border-top:1px solid var(--line);padding:32px 0 48px;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;
+}
+.case-foot a{font-weight:600;text-decoration:none}
+footer{padding:0 0 36px;color:var(--ink-soft);font-size:.85rem;text-align:center}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-name" href="../index.html">Ahmed El Ghrairi</a>
+    <div class="nav-links">
+      <a href="../index.html#projets">Projets</a>
+      <a href="../index.html#veille">Veille</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="case-head">
+  <div class="wrap">
+    <p class="kicker">Étude de cas · Analyse commerciale · Python</p>
+    <h1>Deux systèmes qui ne se parlent pas, et personne pour répondre aux questions simples</h1>
+    <p class="lede">Un marchand de vin en ligne gère ses produits sur deux outils non reliés, un ERP et un site WordPress, avec une table de liaison tenue à la main. Impossible de savoir quelles gammes rapportent vraiment ou où dort l'argent en stock. Première version de cette analyse, livrée en février 2026, avant que je la reprenne plus tard avec l'aide de l'IA.</p>
+    <div class="case-links">
+      <a class="btn btn-primary" href="https://github.com/ahmedelghrairi/bottleneck-analyse-ventes-stocks" target="_blank" rel="noopener">Voir le code sur GitHub</a>
+      <a class="btn btn-ghost" href="../index.html#projets">Tous les projets</a>
+    </div>
+    <p class="tools-line">Python · pandas · plotly</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="facts">
+    <div class="fact"><p class="n">143 680 €</p><p class="l">de chiffre d'affaires sur le mois, trois sources rapprochées</p></div>
+    <div class="fact"><p class="n">91 réf.</p><p class="l">ERP sans correspondance web, suivies plutôt qu'ignorées</p></div>
+    <div class="fact"><p class="n">17 réf.</p><p class="l">à plus de 112 €, un segment haut de gamme confirmé par les ventes</p></div>
+    <div class="fact"><p class="n">-0,52</p><p class="l">de corrélation entre prix et quantités vendues</p></div>
+  </div>
+</div>
+
+<article class="wrap">
+
+  <h2>Le contexte et le besoin métier</h2>
+  <p>BottleNeck vend du vin en ligne. Ses informations produits sont réparties entre un ERP, qui porte les références, les prix et les stocks, et un site WordPress, qui porte les fiches produits et les quantités vendues. Les identifiants diffèrent d'un système à l'autre, une table de liaison tenue à la main sert de passerelle. Nicolas, responsable des ventes, m'a confié la mission en deux temps : d'abord rapprocher les trois sources et documenter les erreurs rencontrées, puis analyser les chiffres pour une présentation devant le comité de direction, en gardant à l'esprit que ce travail servirait de socle à un futur projet de visualisation.</p>
+
+  <h2>Les données : sources, qualité, limites</h2>
+  <p>Trois exports Excel arrêtés au 31 octobre, ventes du 1er au 31 octobre : 825 références dans l'ERP, un export du site web avec SKU et quantités vendues, et une table de liaison entre les deux. La qualité de saisie est le vrai sujet : prix négatifs, quantités de stock négatives, statuts de stock incohérents avec les quantités réelles, doublons, SKU invalides ou absents. Chaque anomalie a été corrigée avec une règle explicite plutôt que supprimée sans justification : les prix négatifs sont des erreurs de signe, remis en valeur absolue, pas des aberrations à écarter.</p>
+  <p>91 références ERP n'ont aucune correspondance dans l'export web. Plutôt que de les ignorer, je les ai suivies séparément : elles pèsent sur la lecture du catalogue mais ne doivent pas fausser le chiffre d'affaires, qui ne peut se calculer que sur des ventes réellement observées.</p>
+
+  <h2>La démarche</h2>
+  <p>Nettoyage source par source, avant toute fusion. Sur l'ERP, les prix négatifs deviennent positifs, les stocks négatifs sont ramenés à zéro, une colonne recréée pour que le statut de stock affiché redevienne cohérent avec la quantité réelle. Sur le web, réduction aux colonnes utiles, deux SKU manifestement invalides supprimés, des centaines de doublons tranchés en faveur de la bonne catégorie de contenu, les lignes sans SKU écartées.</p>
+  <div class="note">
+    <p><strong>Deux périmètres de fusion, pas un seul.</strong> Le chiffre d'affaires et les ventes se calculent sur les seules références avec correspondance web confirmée : on ne peut pas vendre ce qu'on ne peut pas identifier en ligne. Le stock, lui, se calcule sur l'ensemble du catalogue ERP, correspondance ou non : l'argent immobilisé existe même pour un produit qui n'est pas encore en ligne. Confondre les deux périmètres aurait faussé l'un des deux résultats.</p>
+  </div>
+  <p>Pour les prix, deux méthodes de détection croisées, Z-score et écart interquartile, complétées par une boîte à moustaches. Au-delà d'environ 83 €, on entre dans les produits premium. 17 références dépassent 112 € et montent jusqu'à 225 €, avec des ventes réelles cohérentes avec ce positionnement : ce n'est pas une erreur de saisie, c'est un segment haut de gamme légitime, une distinction qui évite de corriger des prix qui n'ont pas besoin de l'être.</p>
+
+  <h2>Les résultats et l'impact</h2>
+  <p>143 680,10 € de chiffre d'affaires sur le mois, reproductible à l'euro près sur le périmètre des ventes confirmées. La règle 80/20 se vérifie mais de façon moins concentrée qu'attendu, un signal que le catalogue est plus équilibré que ne le laisserait penser l'intuition. Le stock est valorisé selon deux logiques, au prix de vente et au prix d'achat, la seconde étant la lecture la plus juste d'un point de vue financier. Les marges vont de 61 % sur le vin à plus de 80 % sur le cognac et le whisky.</p>
+  <p>Trois corrélations closent l'analyse et racontent une histoire cohérente : le prix et les quantités vendues sont négativement liés (-0,52), les ventes et le niveau de stock sont positivement liés (+0,44, les meilleures ventes sont aussi les mieux approvisionnées), et le prix n'a quasiment aucun lien avec le niveau de stock (-0,11). Ces trois chiffres, présentés ensemble, donnent à la direction une lecture simple de la logique commerciale de l'entreprise, sans qu'elle ait besoin de lire une ligne de code.</p>
+
+  <h2>Les limites et les prochaines pistes</h2>
+  <p>Cette première version avait trois angles morts, que j'ai identifiés moi-même en la relisant plus tard : des contrôles qualité faits une fois, à la main, non rejouables d'un mois sur l'autre ; aucun traitement formalisé de la conformité RGPD sur les données personnelles de l'export web ; et une reproductibilité limitée, le notebook ayant été développé sur Google Colab avec un chemin d'accès propre à mon poste de travail plutôt qu'un chemin relatif.</p>
+  <p>Je suis revenu sur ce projet quelques mois plus tard, avec l'aide de l'IA, pour corriger précisément ces trois points : des contrôles automatisés avec Pandera, une section RGPD documentée, un notebook entièrement reproductible. Cette reprise a aussi permis de trouver une anomalie que la relecture manuelle avait manquée. <a href="bottleneck-ia.html">Voir la version 2</a>.</p>
+
+</article>
+
+<div class="wrap case-foot">
+  <a href="../index.html#projets">Retour aux projets</a>
+  <a href="https://github.com/ahmedelghrairi/bottleneck-analyse-ventes-stocks" target="_blank" rel="noopener">Le dépôt GitHub du projet</a>
+</div>
+
+<footer>
+  <p>Ahmed El Ghrairi, 2026.</p>
+</footer>
+
+</body>
+</html>
