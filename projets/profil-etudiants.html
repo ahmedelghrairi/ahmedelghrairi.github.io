@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profil sociodémographique des étudiants Data | Ahmed El Ghrairi</title>
+<meta name="description" content="Étude de cas : pipeline dbt sur Snowflake pour suivre l'évolution du profil sociodémographique des étudiants d'un parcours Data sur quatre ans.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c2331;
+  --ink-soft:#4a5468;
+  --bg:#faf8f4;
+  --card:#ffffff;
+  --accent:#1f4e79;
+  --accent-soft:#e8eff6;
+  --line:#e5e1d8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.7;font-size:16px;
+}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.25}
+a{color:var(--accent)}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px}
+
+nav{
+  position:sticky;top:0;z-index:10;
+  background:rgba(250,248,244,.92);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:1000px;margin:0 auto;padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
+}
+.nav-name{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.nav-links{display:flex;gap:20px;flex-wrap:wrap}
+.nav-links a{color:var(--ink-soft);text-decoration:none;font-size:.92rem;font-weight:500}
+.nav-links a:hover{color:var(--accent)}
+
+.case-head{padding:56px 0 36px;border-bottom:1px solid var(--line)}
+.case-head .kicker{color:var(--accent);font-weight:600;letter-spacing:.05em;text-transform:uppercase;font-size:.78rem}
+.case-head h1{font-size:2.1rem;margin:8px 0 14px}
+.case-head .lede{color:var(--ink-soft);font-size:1.05rem;max-width:680px}
+.case-links{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:9px 18px;border-radius:8px;text-decoration:none;
+  font-weight:600;font-size:.9rem;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+.tools-line{margin-top:18px;color:var(--ink-soft);font-size:.88rem}
+
+.facts{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;
+  margin:36px 0 8px;
+}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.fact .n{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.45rem;color:var(--accent)}
+.fact .l{color:var(--ink-soft);font-size:.85rem;margin-top:4px}
+
+article{padding:16px 0 56px}
+article h2{font-size:1.45rem;margin:40px 0 14px}
+article p{margin-bottom:14px}
+article ul{margin:0 0 14px 22px}
+article li{margin-bottom:8px}
+.note{
+  background:var(--accent-soft);border-left:4px solid var(--accent);
+  border-radius:0 10px 10px 0;padding:16px 20px;margin:20px 0;
+}
+.note p{margin-bottom:0}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.92rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--accent);font-size:.85rem}
+.table-scroll{overflow-x:auto}
+
+.case-foot{
+  border-top:1px solid var(--line);padding:32px 0 48px;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;
+}
+.case-foot a{font-weight:600;text-decoration:none}
+footer{padding:0 0 36px;color:var(--ink-soft);font-size:.85rem;text-align:center}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-name" href="../index.html">Ahmed El Ghrairi</a>
+    <div class="nav-links">
+      <a href="../index.html#projets">Projets</a>
+      <a href="../index.html#veille">Veille</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="case-head">
+  <div class="wrap">
+    <p class="kicker">Étude de cas · Data engineering · dbt & Snowflake</p>
+    <h1>Le parcours Data est-il accessible à tous ? Un pipeline dbt pour objectiver la question</h1>
+    <p class="lede">La direction pédagogique d'un organisme de formation veut savoir si son parcours Data attire un public représentatif de la population française, et comment ce profil évolue dans le temps. J'ai construit un pipeline dbt sur Snowflake pour transformer les inscriptions internes, les croiser avec des données INSEE, et en tirer des indicateurs fiables et reproductibles.</p>
+    <div class="case-links">
+      <a class="btn btn-primary" href="https://github.com/ahmedelghrairi/openclassrooms-p8" target="_blank" rel="noopener">Voir le code sur GitHub</a>
+      <a class="btn btn-ghost" href="../index.html#projets">Tous les projets</a>
+    </div>
+    <p class="tools-line">dbt · Snowflake · SQL</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="facts">
+    <div class="fact"><p class="n">4 647</p><p class="l">inscriptions analysées sur quatre ans, 2022-2025</p></div>
+    <div class="fact"><p class="n">3 sources → 10 modèles</p><p class="l">architecture dbt en trois couches, staging à marts</p></div>
+    <div class="fact"><p class="n">-50 %</p><p class="l">d'inscriptions entre 2022 et 2024, avant un premier rebond</p></div>
+    <div class="fact"><p class="n">30 % vs 52 %</p><p class="l">de femmes chez les étudiants contre dans la population française</p></div>
+  </div>
+</div>
+
+<article class="wrap">
+
+  <h2>Le contexte et le besoin métier</h2>
+  <p>OpenClassrooms veut objectiver une question sensible : son parcours Data Analyst est-il réellement accessible à tous, ou reproduit-il des inégalités d'accès déjà présentes ailleurs ? Marie-Neige Martin, Lead Data Analyst, pilote le sujet pour la direction pédagogique. La demande est claire : un pipeline documenté et reproductible, capable de suivre l'évolution du profil des étudiants d'une cohorte à l'autre, et de le comparer à la population française grâce à des données publiques. Les résultats doivent être compréhensibles par une direction pédagogique sans culture technique, donc autant lisibles dans un support de présentation que dans les données elles-mêmes.</p>
+
+  <h2>Les données : sources, qualité, limites</h2>
+  <p>Trois sources croisées sur la période 2022-2025 : les inscriptions internes au parcours Data (4 647 lignes, avec un identifiant pseudonymisé, une tranche d'âge, un genre déclaré, une région et une année de début), la population française par région, tranche d'âge et genre (INSEE), et le taux de chômage régional (INSEE/France Travail). Le genre n'est pas renseigné pour environ 27 % des inscriptions sur l'ensemble de la période, une proportion trop importante pour être ignorée sans fausser les volumes.</p>
+  <div class="note">
+    <p><strong>La conformité RGPD n'est pas une case à cocher, c'est une étape du pipeline.</strong> L'identifiant étudiant est une donnée pseudonymisée qui ne sert qu'à compter les inscriptions. Il disparaît dès la couche intermediate, où les données sont agrégées par région, tranche d'âge, genre et année : aucune des quatre tables analytiques finales ne permet de remonter à un individu. C'est documenté explicitement dans la configuration de chaque modèle concerné, pas seulement dans un paragraphe à part.</p>
+  </div>
+  <p>Limite assumée : les données de chômage ne sont pas disponibles pour les DROM, qui sont donc inclus dans le volume brut d'inscriptions mais exclus des comparaisons démographiques et de l'analyse chômage, pour ne pas fausser les totaux nationaux avec des régions sans point de comparaison.</p>
+
+  <h2>La démarche</h2>
+  <p>Architecture en trois couches, une source dbt déclarée par table brute plutôt qu'une extraction directe : dbt ne fait que référencer les données déjà chargées dans Snowflake, avec le nom de la base, du schéma et des tables documenté dans un fichier de configuration dédié.</p>
+  <p>La couche staging nettoie et documente chaque source séparément. Les genres manquants sont remplacés par "Non renseigné" plutôt que supprimés, pour ne pas réduire artificiellement les volumes d'inscriptions. Les tranches d'âge INSEE, plus fines que celles du dataset étudiant (elles descendent par exemple à 95 ans et plus), sont regroupées pour correspondre exactement à sa granularité, sans quoi aucune comparaison n'aurait été possible.</p>
+  <p>La couche intermediate agrège les trois sources au même grain, région / tranche d'âge / genre / année. C'est l'étape où l'identifiant étudiant individuel disparaît, remplacé par des comptages : le point de conformité RGPD du pipeline.</p>
+  <p>Les quatre tables de la couche marts répondent chacune à une question métier précise plutôt que de livrer une agrégation générique : l'évolution globale d'une année sur l'autre, la comparaison à la population française par âge, par genre, et par région avec un indicateur normalisé, le nombre d'inscriptions pour 100 000 habitants, pour comparer équitablement des régions de tailles très différentes. La dernière table croise le taux de chômage régional avec le volume d'inscriptions. Chaque colonne de chaque modèle est testée, valeurs non nulles partout, valeurs attendues sur les colonnes catégorielles, pour qu'un changement inattendu dans les données sources casse le pipeline plutôt qu'il ne passe inaperçu.</p>
+
+  <h2>Les résultats et l'impact</h2>
+  <p>Les inscriptions chutent fortement sur la période : -32 % entre 2022 et 2023, -26 % l'année suivante, soit un recul cumulé de 50 % en deux ans, avant un premier rebond de 12 % en 2025. Sur la même période, la qualité de la collecte progresse nettement : la part de genre non renseigné passe de 41,6 % à 6,7 %, un signe que le formulaire d'inscription ou son incitation au remplissage s'est amélioré, indépendamment des tendances de volume.</p>
+  <p>Le déséquilibre de genre, lui, ne bouge pas : les femmes représentent environ 30 % des inscrits sur les quatre années, contre 52 % de la population française. L'écart est stable, pas de dégradation mais pas d'amélioration mesurable non plus, ce qui écarte l'hypothèse d'un problème ponctuel et pointe vers quelque chose de plus structurel dans l'attractivité du parcours pour les femmes.</p>
+  <p>Côté géographie, l'Île-de-France concentre à elle seule 41 à 54 % des inscriptions selon les années, avec un taux d'inscription pour 100 000 habitants trois fois supérieur à toutes les autres régions. Et le taux de chômage régional n'explique pas les écarts observés : les régions les plus touchées par le chômage ne se reconvertissent pas davantage vers la Data. Si le coût de la formation était le principal frein, on s'attendrait à l'effet inverse, ce qui pointe plutôt vers des freins d'accès au numérique ou de notoriété de la formation.</p>
+
+  <h2>Les limites et les prochaines pistes</h2>
+  <p>Le pipeline objective des écarts, il n'en explique pas les causes : la sous-représentation des femmes et l'absence de lien avec le chômage régional sont des faits mesurés, pas encore des diagnostics. Les tranches d'âge et les régions du dataset étudiant sont volontairement grossières pour rester compatibles avec les données INSEE disponibles, ce qui limite la finesse de certains croisements, en particulier au niveau régional où le nombre d'inscriptions par an et par région descend parfois sous la trentaine.</p>
+  <p>Les pistes que je recommande : une enquête qualitative auprès des femmes qui abandonnent le parcours en cours de route ou n'y postulent pas, pour transformer le constat statistique en action ; un suivi de la part de genre non renseigné comme indicateur de qualité continu, puisqu'il s'est déjà nettement amélioré ; et une investigation ciblée sur les régions à fort chômage et faible taux d'inscription, pour vérifier l'hypothèse d'un frein d'accès au numérique plutôt que de coût.</p>
+
+</article>
+
+<div class="wrap case-foot">
+  <a href="../index.html#projets">Retour aux projets</a>
+  <a href="https://github.com/ahmedelghrairi/openclassrooms-p8" target="_blank" rel="noopener">Le dépôt GitHub du projet</a>
+</div>
+
+<footer>
+  <p>Ahmed El Ghrairi, 2026.</p>
+</footer>
+
+</body>
+</html>
