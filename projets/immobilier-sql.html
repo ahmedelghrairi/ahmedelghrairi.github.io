@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Base de données immobilière : modélisation et analyse SQL | Ahmed El Ghrairi</title>
+<meta name="description" content="Étude de cas : conception d'un schéma relationnel 3NF, création d'une base SQLite et 13 requêtes SQL pour analyser le marché immobilier français.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c2331;
+  --ink-soft:#4a5468;
+  --bg:#faf8f4;
+  --card:#ffffff;
+  --accent:#1f4e79;
+  --accent-soft:#e8eff6;
+  --line:#e5e1d8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.7;font-size:16px;
+}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.25}
+a{color:var(--accent)}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px}
+
+nav{
+  position:sticky;top:0;z-index:10;
+  background:rgba(250,248,244,.92);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:1000px;margin:0 auto;padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
+}
+.nav-name{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.nav-links{display:flex;gap:20px;flex-wrap:wrap}
+.nav-links a{color:var(--ink-soft);text-decoration:none;font-size:.92rem;font-weight:500}
+.nav-links a:hover{color:var(--accent)}
+
+.case-head{padding:56px 0 36px;border-bottom:1px solid var(--line)}
+.case-head .kicker{color:var(--accent);font-weight:600;letter-spacing:.05em;text-transform:uppercase;font-size:.78rem}
+.case-head h1{font-size:2.1rem;margin:8px 0 14px}
+.case-head .lede{color:var(--ink-soft);font-size:1.05rem;max-width:680px}
+.case-links{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:9px 18px;border-radius:8px;text-decoration:none;
+  font-weight:600;font-size:.9rem;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+.tools-line{margin-top:18px;color:var(--ink-soft);font-size:.88rem}
+
+.facts{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;
+  margin:36px 0 8px;
+}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.fact .n{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.45rem;color:var(--accent)}
+.fact .l{color:var(--ink-soft);font-size:.85rem;margin-top:4px}
+
+article{padding:16px 0 32px}
+article h2{font-size:1.45rem;margin:40px 0 14px}
+article p{margin-bottom:14px}
+article ul{margin:0 0 14px 22px}
+article li{margin-bottom:8px}
+.note{
+  background:var(--accent-soft);border-left:4px solid var(--accent);
+  border-radius:0 10px 10px 0;padding:16px 20px;margin:20px 0;
+}
+.note p{margin-bottom:0}
+figure{margin:20px 0}
+figure img{width:100%;border-radius:10px;border:1px solid var(--line);display:block}
+figcaption{font-size:.82rem;color:var(--ink-soft);margin-top:6px}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.92rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--accent);font-size:.85rem}
+
+.case-foot{
+  border-top:1px solid var(--line);padding:32px 0 48px;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;
+}
+.case-foot a{font-weight:600;text-decoration:none}
+footer{padding:0 0 36px;color:var(--ink-soft);font-size:.85rem;text-align:center}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-name" href="../index.html">Ahmed El Ghrairi</a>
+    <div class="nav-links">
+      <a href="../index.html#projets">Projets</a>
+      <a href="../index.html#veille">Veille</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="case-head">
+  <div class="wrap">
+    <p class="kicker">Étude de cas · Modélisation & SQL</p>
+    <h1>Passer de trois tables à cinq, sans perdre en cohérence</h1>
+    <p class="lede">Un réseau national d'agences immobilières veut centraliser ses transactions pour mieux analyser le marché. Le schéma de départ ne portait que les biens et les ventes : j'ai dû l'étendre pour intégrer la population et le découpage géographique, sans rien casser de ce qui existait déjà.</p>
+    <div class="case-links">
+      <a class="btn btn-primary" href="https://github.com/ahmedelghrairi/base-donnees-immobiliere-sql" target="_blank" rel="noopener">Voir le code sur GitHub</a>
+      <a class="btn btn-ghost" href="../index.html#projets">Tous les projets</a>
+    </div>
+    <p class="tools-line">SQLite · SQL Power Architect · SQL</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="facts">
+    <div class="fact"><p class="n">5 tables</p><p class="l">en 3e forme normale, contre 3 au départ</p></div>
+    <div class="fact"><p class="n">34 169</p><p class="l">ventes chargées, autant de biens, sans écart</p></div>
+    <div class="fact"><p class="n">13 requêtes</p><p class="l">des agrégats simples aux fonctions de fenêtrage</p></div>
+    <div class="fact"><p class="n">12 084 €</p><p class="l">prix moyen du m² à Paris, le plus élevé de France</p></div>
+  </div>
+</div>
+
+<article class="wrap">
+
+  <h2>Le contexte et le besoin métier</h2>
+  <p>Laplace Immo, réseau national d'agences immobilières, veut se démarquer en construisant un modèle de prédiction des prix de vente. Avant d'en arriver là, il faut une base fiable : Clara, la CTO, m'a confié la refonte du schéma qui collecte les transactions immobilières et foncières en France, à partir de trois sources publiques, les Demandes de valeurs foncières (DVF), les chiffres de population de l'INSEE, et le référentiel géographique de data.gouv.</p>
+
+  <h2>Les données : sources, qualité, limites</h2>
+  <p>Le schéma de départ ne comptait que trois tables, Bien, Vente et Commune, avec une clé déjà bien pensée, <code>id_codedep_codecommune</code>, la concaténation du code département et du code commune plutôt que le seul code département, qui ne suffit pas à identifier une commune de façon unique : plusieurs communes peuvent partager le même code postal.</p>
+  <figure>
+    <img src="images/immobilier-schema-initial.jpg" alt="Schéma relationnel initial, trois tables : Bien, Vente, Commune">
+    <figcaption>Le schéma de départ, fourni par la CTO, à étendre pour intégrer population et découpage régional.</figcaption>
+  </figure>
+  <div class="note">
+    <p><strong>La conformité RGPD se joue avant la base, pas dedans.</strong> Les fichiers préparés pour l'import ne contiennent que des informations sur le bien et la transaction, adresse, surface, nombre de pièces, prix, date. Aucun nom, aucun identifiant d'acquéreur ou de notaire n'est conservé : le principe de minimisation s'applique dès la préparation des CSV, avant même la création des tables.</p>
+  </div>
+
+  <h2>La démarche</h2>
+  <p>Étendre le schéma à cinq tables pour intégrer la population et le découpage région/département demandés par Clara, en respectant la 3e forme normale : chaque table ne porte que les attributs qui dépendent directement de sa propre clé. La redondance entre nom de région et code département, par exemple, est éliminée par la chaîne de clés étrangères Régions → Départements → Communes → Biens plutôt que répétée sur chaque ligne.</p>
+  <figure>
+    <img src="images/immobilier-schema-final.png" alt="Schéma relationnel final, cinq tables : Régions, Départements, Communes, Biens, Ventes">
+    <figcaption>Le schéma final, modélisé avec SQL Power Architect, qui génère directement le script de création des tables.</figcaption>
+  </figure>
+  <p>Chaque fichier source est ensuite retravaillé pour correspondre exactement aux types et contraintes des tables cibles avant le chargement : clés étrangères vérifiées, doublons éliminés, colonnes non retenues écartées dès cette étape plutôt qu'après coup dans la base. Une fois les cinq tables peuplées, une requête de contrôle compare le nombre de lignes par table à ce qui était attendu, la première des treize requêtes du projet, avant même de commencer l'analyse.</p>
+  <p>Les treize requêtes progressent en complexité : des comptages et moyennes simples d'abord, puis des sous-requêtes corrélées pour calculer une proportion, des CTE (<code>WITH</code>) pour comparer deux trimestres côte à côte, et une fonction de fenêtrage, <code>ROW_NUMBER() OVER (PARTITION BY ...)</code>, pour classer les communes les plus chères à l'intérieur de chaque département plutôt que sur l'ensemble du pays. Le choix entre <code>WHERE</code> et <code>HAVING</code> revient plusieurs fois et vaut la peine d'être explicite : <code>WHERE</code> filtre les lignes avant regroupement, <code>HAVING</code> filtre un résultat déjà agrégé, comme un nombre de ventes par commune.</p>
+
+  <h2>Les résultats et l'impact</h2>
+  <p>31 378 appartements vendus au premier semestre 2020, avec un déséquilibre régional très marqué : l'Île-de-France concentre 13 995 ventes, presque quatre fois plus que la région suivante, Provence-Alpes-Côte d'Azur avec 3 649. Sur le prix, Paris domine sans partage, 12 084 € du m² en moyenne, plus de 1,6 fois les Hauts-de-Seine, deuxième département le plus cher à 7 301 €.</p>
+  <p>Deux résultats intéressent particulièrement un projet de prédiction de prix. D'abord, la taille compte plus qu'on ne le pense au m² : un appartement de 3 pièces se vend en moyenne 12,7 % moins cher au m² qu'un 2 pièces, un effet à intégrer dans tout modèle plutôt qu'un simple prix au m² uniforme. Ensuite, malgré le contexte du premier semestre 2020, les ventes progressent de 3,68 % entre le premier et le deuxième trimestre, un signal de marché résilient plutôt qu'en repli.</p>
+
+  <h2>Les limites et les prochaines pistes</h2>
+  <p>La base ne couvre qu'un semestre : aucune tendance pluriannuelle n'est possible en l'état, seulement une photographie. Le prix au m² moyen par département masque aussi de fortes disparités internes, un département cher peut contenir des communes à des niveaux de prix très différents, ce que les requêtes par commune commencent à révéler sans l'épuiser complètement.</p>
+  <p>Les pistes que je recommande : élargir la base à plusieurs années pour permettre une vraie analyse de tendance, avant d'aller plus loin vers le modèle de prédiction visé par la direction, et automatiser le chargement des mises à jour DVF plutôt que de repartir d'un import manuel à chaque nouveau semestre.</p>
+
+</article>
+
+<div class="wrap case-foot">
+  <a href="../index.html#projets">Retour aux projets</a>
+  <a href="https://github.com/ahmedelghrairi/base-donnees-immobiliere-sql" target="_blank" rel="noopener">Le dépôt GitHub du projet</a>
+</div>
+
+<footer>
+  <p>Ahmed El Ghrairi, 2026.</p>
+</footer>
+
+</body>
+</html>
