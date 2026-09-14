@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sous-nutrition dans le monde : une étude FAO | Ahmed El Ghrairi</title>
+<meta name="description" content="Étude de cas : analyse de la sous-nutrition mondiale entre 2013 et 2017 à partir de quatre sources FAO, disponibilité alimentaire, aide internationale et usages des céréales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c2331;
+  --ink-soft:#4a5468;
+  --bg:#faf8f4;
+  --card:#ffffff;
+  --accent:#1f4e79;
+  --accent-soft:#e8eff6;
+  --line:#e5e1d8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.7;font-size:16px;
+}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.25}
+a{color:var(--accent)}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px}
+
+nav{
+  position:sticky;top:0;z-index:10;
+  background:rgba(250,248,244,.92);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:1000px;margin:0 auto;padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
+}
+.nav-name{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.nav-links{display:flex;gap:20px;flex-wrap:wrap}
+.nav-links a{color:var(--ink-soft);text-decoration:none;font-size:.92rem;font-weight:500}
+.nav-links a:hover{color:var(--accent)}
+
+.case-head{padding:56px 0 36px;border-bottom:1px solid var(--line)}
+.case-head .kicker{color:var(--accent);font-weight:600;letter-spacing:.05em;text-transform:uppercase;font-size:.78rem}
+.case-head h1{font-size:2.1rem;margin:8px 0 14px}
+.case-head .lede{color:var(--ink-soft);font-size:1.05rem;max-width:680px}
+.case-links{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:9px 18px;border-radius:8px;text-decoration:none;
+  font-weight:600;font-size:.9rem;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+.tools-line{margin-top:18px;color:var(--ink-soft);font-size:.88rem}
+
+.facts{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;
+  margin:36px 0 8px;
+}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.fact .n{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.45rem;color:var(--accent)}
+.fact .l{color:var(--ink-soft);font-size:.85rem;margin-top:4px}
+
+article{padding:16px 0 56px}
+article h2{font-size:1.45rem;margin:40px 0 14px}
+article p{margin-bottom:14px}
+article ul{margin:0 0 14px 22px}
+article li{margin-bottom:8px}
+.note{
+  background:var(--accent-soft);border-left:4px solid var(--accent);
+  border-radius:0 10px 10px 0;padding:16px 20px;margin:20px 0;
+}
+.note p{margin-bottom:0}
+
+.case-foot{
+  border-top:1px solid var(--line);padding:32px 0 48px;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;
+}
+.case-foot a{font-weight:600;text-decoration:none}
+footer{padding:0 0 36px;color:var(--ink-soft);font-size:.85rem;text-align:center}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-name" href="../index.html">Ahmed El Ghrairi</a>
+    <div class="nav-links">
+      <a href="../index.html#projets">Projets</a>
+      <a href="../index.html#veille">Veille</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="case-head">
+  <div class="wrap">
+    <p class="kicker">Étude de cas · Analyse de données · Python</p>
+    <h1>La faim dans le monde n'est pas un problème de production</h1>
+    <p class="lede">La FAO veut comprendre pourquoi la sous-nutrition persiste alors que la planète produit, en théorie, largement de quoi nourrir tout le monde. J'ai nettoyé et croisé quatre sources sur la période 2013-2017 pour objectiver la question, plutôt que d'y répondre par intuition.</p>
+    <div class="case-links">
+      <a class="btn btn-primary" href="https://github.com/ahmedelghrairi/etude-sous-nutrition-mondiale" target="_blank" rel="noopener">Voir le code sur GitHub</a>
+      <a class="btn btn-ghost" href="../index.html#projets">Tous les projets</a>
+    </div>
+    <p class="tools-line">Python · pandas · matplotlib</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="facts">
+    <div class="fact"><p class="n">535,7 M</p><p class="l">personnes en sous-nutrition en 2017, soit 7,1 % de la population mondiale</p></div>
+    <div class="fact"><p class="n">8,37 Md</p><p class="l">personnes théoriquement nourrissables avec la disponibilité alimentaire mondiale</p></div>
+    <div class="fact"><p class="n">42,75 %</p><p class="l">des céréales disponibles vont à l'alimentation humaine, 36,29 % à l'alimentation animale</p></div>
+    <div class="fact"><p class="n">-0,59</p><p class="l">de corrélation entre disponibilité alimentaire et sous-nutrition</p></div>
+  </div>
+</div>
+
+<article class="wrap">
+
+  <h2>Le contexte et le besoin métier</h2>
+  <p>Marc, chercheur en économie de la santé à la FAO, pilote une étude de grande ampleur sur l'alimentation mondiale et son lien avec la sous-nutrition. Un premier analyste avait déjà traité la période récente avant de quitter l'équipe. Ma mission reprend la partie historique, 2013 à 2017 : nettoyer quatre sources hétérogènes, les croiser, et en tirer des indicateurs qui aident à comprendre où et pourquoi la faim persiste.</p>
+
+  <h2>Les données : sources, qualité, limites</h2>
+  <p>Quatre fichiers FAO, chacun avec sa propre unité à harmoniser avant de pouvoir les croiser : la population par pays et par année, exprimée en milliers et ramenée en nombre d'individus ; la disponibilité alimentaire par pays et par produit, avec des volumes en milliers de tonnes convertis en kilogrammes, en plus des kcal et grammes par personne déjà comparables directement ; l'aide alimentaire par pays, année et produit, elle aussi en tonnes ; et la sous-nutrition, mesurée par période de trois ans plutôt qu'annuellement.</p>
+  <div class="note">
+    <p><strong>Une conversion qui change le sens des chiffres, pas seulement leur taille.</strong> Les valeurs manquantes de la disponibilité alimentaire ne signalent pas une non-réponse à corriger : un pays qui ne consomme pas un produit n'a simplement rien à déclarer pour lui. Elles sont donc remplacées par zéro, pas ignorées ni imputées par une moyenne qui n'aurait aucun sens ici.</p>
+  </div>
+  <p>La jointure entre sous-nutrition et population demandait une attention particulière : la sous-nutrition est mesurée par période de trois ans quand la population est annuelle. Une jointure directe sur l'année aurait perdu des lignes ; la période 2016-2018 est donc retenue comme référence de l'année 2017, cohérente avec la population de cette même année.</p>
+
+  <h2>La démarche</h2>
+  <p>Chaque source est explorée avant nettoyage, dimensions, types de colonnes, décompte des valeurs présentes, pour ne pas fusionner à l'aveugle des tables aux échelles incompatibles. Une fois les quatre tables harmonisées, l'analyse suit une progression volontaire : d'abord des chiffres de cadrage sur la sous-nutrition et la disponibilité théorique, puis une lecture par usage (céréales, alimentation animale, pertes), puis un classement par pays, et enfin une analyse complémentaire qui met en relation deux variables plutôt que de les présenter séparément.</p>
+  <p>Le calcul du nombre de personnes théoriquement nourrissables applique un besoin moyen de 2 500 kcal par jour, une référence FAO/OMS, à la disponibilité alimentaire mondiale totale. Refaire ce calcul en ne gardant que les produits d'origine végétale isole leur contribution propre, sans les produits animaux qui consomment eux-mêmes une partie de ces mêmes céréales, un point qui explique pourquoi le second chiffre (6,9 milliards) reste très proche du premier (8,37 milliards) malgré l'exclusion d'une catégorie entière de produits.</p>
+
+  <h2>Les résultats et l'impact</h2>
+  <p>535,7 millions de personnes vivaient en sous-nutrition en 2017, soit 7,1 % de la population mondiale. Dans le même temps, la disponibilité alimentaire mondiale suffirait théoriquement à nourrir 8,37 milliards de personnes, davantage que la population de l'époque. Ce simple écart démontre que la faim n'est pas d'abord un problème de volume produit : les produits végétaux, pris seuls, suffiraient déjà à nourrir 92 % de la population mondiale.</p>
+  <p>La vraie question est celle des usages. Sur la disponibilité intérieure totale, seulement 42,75 % des céréales vont à l'alimentation humaine, contre 36,29 % à l'alimentation animale. Le cas de la Thaïlande sur le manioc illustre concrètement ce mécanisme : une production élevée, majoritairement exportée, qui contribue peu à l'alimentation nationale, dans un pays où la sous-nutrition atteint tout de même 8,96 %. Haïti (48,3 %) et la Corée du Nord (47,2 %) ferment la marche des pays les plus touchés, loin devant l'Afghanistan, pourtant dixième du classement avec 28,9 %.</p>
+  <p>La corrélation entre disponibilité alimentaire par habitant et taux de sous-nutrition, -0,59, confirme un lien réel mais incomplet : la disponibilité seule n'explique pas tout. La répartition, les pertes et l'accès à la nourriture pèsent tout autant, ce qui recentre la question vers des leviers de politique publique plutôt que vers la seule augmentation de la production.</p>
+
+  <h2>Les limites et les prochaines pistes</h2>
+  <p>L'étude est une photographie sur cinq ans qui ne couvre que la partie historique du projet global de la FAO : elle ne dit rien de l'évolution après 2017, traitée par ailleurs par l'équipe. La corrélation calculée reste globale, à l'échelle du pays, elle ne capture pas les inégalités de répartition à l'intérieur même d'un pays, qui peuvent être aussi déterminantes que la moyenne nationale.</p>
+  <p>Les pistes que je recommande : croiser les résultats avec des données de pauvreté et de stabilité politique par pays, pour tester si la corrélation actuelle s'explique en partie par ces facteurs, et prolonger l'exemple du manioc thaïlandais à d'autres cultures d'export pour vérifier si ce mécanisme se répète ailleurs.</p>
+
+</article>
+
+<div class="wrap case-foot">
+  <a href="../index.html#projets">Retour aux projets</a>
+  <a href="https://github.com/ahmedelghrairi/etude-sous-nutrition-mondiale" target="_blank" rel="noopener">Le dépôt GitHub du projet</a>
+</div>
+
+<footer>
+  <p>Ahmed El Ghrairi, 2026.</p>
+</footer>
+
+</body>
+</html>
