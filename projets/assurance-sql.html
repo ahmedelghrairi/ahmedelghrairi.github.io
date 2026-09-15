@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Base de données assurance habitation : SQL | Ahmed El Ghrairi</title>
+<meta name="description" content="Étude de cas : modélisation d'un schéma relationnel normalisé et 12 requêtes SQL pour analyser un portefeuille de contrats d'assurance habitation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c2331;
+  --ink-soft:#4a5468;
+  --bg:#faf8f4;
+  --card:#ffffff;
+  --accent:#1f4e79;
+  --accent-soft:#e8eff6;
+  --line:#e5e1d8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.7;font-size:16px;
+}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.25}
+a{color:var(--accent)}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px}
+
+nav{
+  position:sticky;top:0;z-index:10;
+  background:rgba(250,248,244,.92);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:1000px;margin:0 auto;padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
+}
+.nav-name{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.nav-links{display:flex;gap:20px;flex-wrap:wrap}
+.nav-links a{color:var(--ink-soft);text-decoration:none;font-size:.92rem;font-weight:500}
+.nav-links a:hover{color:var(--accent)}
+
+.case-head{padding:56px 0 36px;border-bottom:1px solid var(--line)}
+.case-head .kicker{color:var(--accent);font-weight:600;letter-spacing:.05em;text-transform:uppercase;font-size:.78rem}
+.case-head h1{font-size:2.1rem;margin:8px 0 14px}
+.case-head .lede{color:var(--ink-soft);font-size:1.05rem;max-width:680px}
+.case-links{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:9px 18px;border-radius:8px;text-decoration:none;
+  font-weight:600;font-size:.9rem;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+.tools-line{margin-top:18px;color:var(--ink-soft);font-size:.88rem}
+
+.facts{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;
+  margin:36px 0 8px;
+}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.fact .n{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.45rem;color:var(--accent)}
+.fact .l{color:var(--ink-soft);font-size:.85rem;margin-top:4px}
+
+article{padding:16px 0 56px}
+article h2{font-size:1.45rem;margin:40px 0 14px}
+article p{margin-bottom:14px}
+article ul{margin:0 0 14px 22px}
+article li{margin-bottom:8px}
+.note{
+  background:var(--accent-soft);border-left:4px solid var(--accent);
+  border-radius:0 10px 10px 0;padding:16px 20px;margin:20px 0;
+}
+.note p{margin-bottom:0}
+
+.case-foot{
+  border-top:1px solid var(--line);padding:32px 0 48px;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;
+}
+.case-foot a{font-weight:600;text-decoration:none}
+footer{padding:0 0 36px;color:var(--ink-soft);font-size:.85rem;text-align:center}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-name" href="../index.html">Ahmed El Ghrairi</a>
+    <div class="nav-links">
+      <a href="../index.html#projets">Projets</a>
+      <a href="../index.html#veille">Veille</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="case-head">
+  <div class="wrap">
+    <p class="kicker">Étude de cas · Modélisation & SQL</p>
+    <h1>Une clé composite pour résoudre un problème d'identifiant</h1>
+    <p class="lede">Modéliser une base de données ne se résume pas à dessiner des tables : c'est d'abord choisir la bonne clé. Sur ce projet d'assurance habitation, le code postal ne suffisait pas à identifier une commune. Voici comment le schéma, le chargement et les douze requêtes SQL qui en découlent ont été construits.</p>
+    <div class="case-links">
+      <a class="btn btn-primary" href="https://github.com/ahmedelghrairi/base-donnees-assurance-sql" target="_blank" rel="noopener">Voir le code sur GitHub</a>
+      <a class="btn btn-ghost" href="../index.html#projets">Tous les projets</a>
+    </div>
+    <p class="tools-line">MySQL · SQL Power Architect · SQL</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="facts">
+    <div class="fact"><p class="n">30 326</p><p class="l">contrats chargés, sur 30 335 lignes sources</p></div>
+    <div class="fact"><p class="n">2 tables</p><p class="l">liées par une clé composite plutôt qu'un simple code postal</p></div>
+    <div class="fact"><p class="n">12 requêtes</p><p class="l">des comptages simples aux jointures multi-critères</p></div>
+    <div class="fact"><p class="n">14 177</p><p class="l">contrats en Île-de-France, 47 % du portefeuille à elle seule</p></div>
+  </div>
+</div>
+
+<article class="wrap">
+
+  <h2>Le contexte et le besoin métier</h2>
+  <p>Un assureur habitation dispose de deux fichiers, ses contrats d'un côté, un référentiel géographique des communes françaises de l'autre, sans base de données pour les exploiter ensemble. L'exercice couvre le cycle complet d'un premier projet SQL : comprendre les données, concevoir un schéma normalisé, créer et charger la base, puis répondre à douze questions métier concrètes.</p>
+
+  <h2>Les données : sources, qualité, limites</h2>
+  <p>Deux fichiers sources : les contrats (adresse, surface, type de bien, formule de garantie, cotisation) et un référentiel par commune (région, département, académie). Comprendre les données avant de les modéliser a commencé par un dictionnaire complet, colonne par colonne, avec type, taille et description, avant toute création de table.</p>
+  <div class="note">
+    <p><strong>Pourquoi le code postal ne suffit pas comme clé.</strong> Un même code postal peut couvrir plusieurs communes, ce n'est donc pas un identifiant fiable pour relier deux tables. La clé retenue, <code>Code_dep_code_commune</code>, concatène le code département et le code commune : une clé composite construite spécifiquement pour être unique, plutôt qu'une donnée déjà présente mais ambiguë.</p>
+  </div>
+  <p>Cette clé a aussi révélé un vrai problème de données : sur 30 335 contrats sources, 9 pointent vers un code de commune absent du référentiel région, tous situés en outre-mer. Plutôt que de les forcer dans la base ou de les écarter en silence, l'écart est identifié et quantifié : 30 326 contrats chargés, 9 orphelins documentés.</p>
+
+  <h2>La démarche</h2>
+  <p>Le schéma relationnel suit directement le dictionnaire de données : deux tables, une relation 1-N de région vers contrat, une seule clé étrangère. Modélisé avec SQL Power Architect, il génère le script de création des tables, avec la clé primaire de chaque table et la contrainte de clé étrangère explicitement posées avant tout chargement.</p>
+  <p>Chaque requête suit la même méthode : reformuler la question métier avec précision, identifier les tables et colonnes réellement nécessaires, choisir la bonne fonction SQL, puis vérifier que le résultat répond effectivement à la question posée, pas seulement qu'il s'exécute sans erreur. Sur la requête 2, par exemple, la table région contient une ligne par commune : lister les noms de région sans <code>DISTINCT</code> aurait produit des dizaines de répétitions du même nom. La logique se documente aussi bien qu'elle se code.</p>
+
+  <h2>Les résultats et l'impact</h2>
+  <p>25 612 des 30 326 contrats chargés portent sur une résidence principale. La cotisation mensuelle moyenne s'établit à 19,33 €, mais avec un écart net selon le territoire : 36,40 € à Paris contre 17,07 € en Corse-du-Sud, dixième département du classement. La concentration géographique est plus marquée encore : l'Île-de-France rassemble 14 177 contrats, près de 47 % de l'ensemble du portefeuille, loin devant la Provence-Alpes-Côte d'Azur et ses 3 279 contrats.</p>
+  <p>Le croisement type de bien et localisation affine la lecture : sur le seul département de Saône-et-Loire, quatre contrats concernent des maisons en résidence principale, deux en formule Integral et deux en Classique, un échantillon assez petit pour illustrer qu'une requête bien construite reste utile même sur des volumes réduits, pas seulement sur les gros agrégats.</p>
+
+  <h2>Les limites et les prochaines pistes</h2>
+  <p>Le schéma actuel ne couvre que deux entités, contrat et région : il ne permet pas encore de suivre l'historique d'un contrat dans le temps, ni de relier un sinistre à un contrat. Les 9 contrats orphelins restent hors base, une perte mineure en volume mais un signal à surveiller si la source de données s'étend à de nouveaux territoires.</p>
+  <p>Les pistes que je recommande : ajouter une table sinistres reliée à contrat pour croiser cotisation et sinistralité par territoire, et automatiser le contrôle des codes de commune orphelins à chaque nouvel import, plutôt que de le découvrir après coup comme ici.</p>
+
+</article>
+
+<div class="wrap case-foot">
+  <a href="../index.html#projets">Retour aux projets</a>
+  <a href="https://github.com/ahmedelghrairi/base-donnees-assurance-sql" target="_blank" rel="noopener">Le dépôt GitHub du projet</a>
+</div>
+
+<footer>
+  <p>Ahmed El Ghrairi, 2026.</p>
+</footer>
+
+</body>
+</html>
