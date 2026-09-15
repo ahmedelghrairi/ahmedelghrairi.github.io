@@ -72,6 +72,9 @@ article li{margin-bottom:8px}
   border-radius:0 10px 10px 0;padding:16px 20px;margin:20px 0;
 }
 .note p{margin-bottom:0}
+figure{margin:20px 0}
+figure img{width:100%;border-radius:10px;border:1px solid var(--line);display:block}
+figcaption{font-size:.82rem;color:var(--ink-soft);margin-top:6px}
 
 .case-foot{
   border-top:1px solid var(--line);padding:32px 0 48px;
@@ -129,6 +132,10 @@ footer{padding:0 0 36px;color:var(--ink-soft);font-size:.85rem;text-align:center
   <p>Cette clé a aussi révélé un vrai problème de données : sur 30 335 contrats sources, 9 pointent vers un code de commune absent du référentiel région, tous situés en outre-mer. Plutôt que de les forcer dans la base ou de les écarter en silence, l'écart est identifié et quantifié : 30 326 contrats chargés, 9 orphelins documentés.</p>
 
   <h2>La démarche</h2>
+  <figure>
+    <img src="https://raw.githubusercontent.com/ahmedelghrairi/base-donnees-assurance-sql/main/schema_relationnel.png" alt="Schéma relationnel : tables Contrat et Region reliées par Code_dep_code_commune">
+    <figcaption>Le schéma final, modélisé avec SQL Power Architect : deux tables reliées par la clé composite Code_dep_code_commune.</figcaption>
+  </figure>
   <p>Le schéma relationnel suit directement le dictionnaire de données : deux tables, une relation 1-N de région vers contrat, une seule clé étrangère. Modélisé avec SQL Power Architect, il génère le script de création des tables, avec la clé primaire de chaque table et la contrainte de clé étrangère explicitement posées avant tout chargement.</p>
   <p>Chaque requête suit la même méthode : reformuler la question métier avec précision, identifier les tables et colonnes réellement nécessaires, choisir la bonne fonction SQL, puis vérifier que le résultat répond effectivement à la question posée, pas seulement qu'il s'exécute sans erreur. Sur la requête 2, par exemple, la table région contient une ligne par commune : lister les noms de région sans <code>DISTINCT</code> aurait produit des dizaines de répétitions du même nom. La logique se documente aussi bien qu'elle se code.</p>
 
