@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analyse des ventes — Le Grand Marché | Ahmed El Ghrairi</title>
+<meta name="description" content="Étude de cas : rapport mensuel de data visualisation pour un e-commerce, cinq graphiques et storytelling pour la direction, tableau de bord Excel pour les clients affiliés.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c2331;
+  --ink-soft:#4a5468;
+  --bg:#faf8f4;
+  --card:#ffffff;
+  --accent:#1f4e79;
+  --accent-soft:#e8eff6;
+  --line:#e5e1d8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.7;font-size:16px;
+}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.25}
+a{color:var(--accent)}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px}
+
+nav{
+  position:sticky;top:0;z-index:10;
+  background:rgba(250,248,244,.92);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:1000px;margin:0 auto;padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
+}
+.nav-name{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.nav-links{display:flex;gap:20px;flex-wrap:wrap}
+.nav-links a{color:var(--ink-soft);text-decoration:none;font-size:.92rem;font-weight:500}
+.nav-links a:hover{color:var(--accent)}
+
+.case-head{padding:56px 0 36px;border-bottom:1px solid var(--line)}
+.case-head .kicker{color:var(--accent);font-weight:600;letter-spacing:.05em;text-transform:uppercase;font-size:.78rem}
+.case-head h1{font-size:2.1rem;margin:8px 0 14px}
+.case-head .lede{color:var(--ink-soft);font-size:1.05rem;max-width:680px}
+.case-links{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:9px 18px;border-radius:8px;text-decoration:none;
+  font-weight:600;font-size:.9rem;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+.tools-line{margin-top:18px;color:var(--ink-soft);font-size:.88rem}
+
+.facts{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;
+  margin:36px 0 8px;
+}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.fact .n{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.45rem;color:var(--accent)}
+.fact .l{color:var(--ink-soft);font-size:.85rem;margin-top:4px}
+
+article{padding:16px 0 56px}
+article h2{font-size:1.45rem;margin:40px 0 14px}
+article p{margin-bottom:14px}
+article ul{margin:0 0 14px 22px}
+article li{margin-bottom:8px}
+.note{
+  background:var(--accent-soft);border-left:4px solid var(--accent);
+  border-radius:0 10px 10px 0;padding:16px 20px;margin:20px 0;
+}
+.note p{margin-bottom:0}
+figure{margin:20px 0}
+figure img{width:100%;border-radius:10px;border:1px solid var(--line);display:block}
+figcaption{font-size:.82rem;color:var(--ink-soft);margin-top:6px}
+.shots{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
+@media (max-width:640px){.shots{grid-template-columns:1fr}}
+
+.case-foot{
+  border-top:1px solid var(--line);padding:32px 0 48px;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;
+}
+.case-foot a{font-weight:600;text-decoration:none}
+footer{padding:0 0 36px;color:var(--ink-soft);font-size:.85rem;text-align:center}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-name" href="../index.html">Ahmed El Ghrairi</a>
+    <div class="nav-links">
+      <a href="../index.html#projets">Projets</a>
+      <a href="../index.html#veille">Veille</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="case-head">
+  <div class="wrap">
+    <p class="kicker">Étude de cas · Data visualisation · Storytelling</p>
+    <h1>Expliquer une baisse de chiffre d'affaires en cinq graphiques, pas un de plus</h1>
+    <p class="lede">Un directeur marketing demande de comprendre l'origine d'une baisse de CA, mais impose une contrainte stricte : cinq diapositives maximum, un graphique par diapositive, pour un public non technique. Voici comment j'ai choisi quoi montrer, et ce que ça révèle.</p>
+    <div class="case-links">
+      <a class="btn btn-primary" href="https://github.com/ahmedelghrairi/analyse-ventes-grand-marche" target="_blank" rel="noopener">Voir le code sur GitHub</a>
+      <a class="btn btn-ghost" href="../index.html#projets">Tous les projets</a>
+    </div>
+    <p class="tools-line">Python · Excel · Data storytelling</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="facts">
+    <div class="fact"><p class="n">~50 %</p><p class="l">du CA reposait sur le high-tech avant son arrêt stratégique</p></div>
+    <div class="fact"><p class="n">5 graphiques</p><p class="l">pour couvrir huit demandes distinctes du directeur marketing</p></div>
+    <div class="fact"><p class="n">6 min</p><p class="l">seuil observé où le panier moyen passe de 30-40 € à 50 €</p></div>
+    <div class="fact"><p class="n">62,8 %</p><p class="l">du CA clients affiliés de février vient de la nourriture</p></div>
+  </div>
+</div>
+
+<article class="wrap">
+
+  <h2>Le contexte et le besoin métier</h2>
+  <p>Le Grand Marché est une enseigne de grande distribution qui livre à domicile les commandes passées en ligne. Deux demandes du même mois, deux publics différents. Frédéric, directeur marketing, doit présenter à la direction d'où vient la baisse du chiffre d'affaires et comment la situation va évoluer, en cinq diapositives maximum, un graphique par diapositive, pour un auditoire non technique. Pauline, elle, a besoin d'un tableau de bord Excel opérationnel sur les clients affiliés, qu'elle pourra mettre à jour elle-même chaque mois.</p>
+
+  <h2>Les données : sources, qualité, limites</h2>
+  <p>Pour le rapport à Frédéric, les graphiques sont déjà générés automatiquement par un script interne : le travail porte sur la sélection, l'interprétation et la mise en récit, pas sur la production des visuels eux-mêmes. Pour le tableau de bord de Pauline, les données brutes des clients affiliés de février sont fournies à compléter dans une trame déjà en place pour janvier, avec obligation de conserver les formules actives plutôt que de les figer en valeurs.</p>
+
+  <h2>La démarche</h2>
+  <p>La vraie contrainte du rapport marketing n'est pas technique, elle est éditoriale : Frédéric demande de couvrir huit sujets différents (répartition des ventes, panier moyen, quatre évolutions distinctes, temps passé sur le site, projection) en cinq graphiques. Plutôt que de sacrifier des sujets, plusieurs demandes se combinent dans un même graphique quand leur lecture croisée le permet.</p>
+  <div class="shots">
+    <figure><img src="images/grand-marche-ca-categorie.png" alt="Répartition du chiffre d'affaires par catégorie sur 12 mois"><figcaption>La disparition du high-tech, en rouge, explique directement la baisse de CA.</figcaption></figure>
+    <figure><img src="images/grand-marche-trafic-ventes.png" alt="Évolution du trafic et des ventes"><figcaption>Le trafic grimpe bien plus vite que les ventes : un signal de conversion, pas d'audience.</figcaption></figure>
+  </div>
+  <p>Sur ce dernier point justement, croiser l'évolution du trafic et celle des ventes sur un même graphique répond en une seule diapositive à deux demandes distinctes de Frédéric, l'évolution des visites et celle du ratio achats/visites, tout en rendant visible un écart qu'aucune des deux courbes prise seule n'aurait montré aussi clairement.</p>
+  <p>Pour Pauline, la logique est inverse : le format compte autant que le contenu. Le tableau de bord garde ses formules actives, une structure réutilisable d'un mois sur l'autre, et cinq graphiques distincts incluant un graphique en secteurs, pour que la lecture reste immédiate sans qu'elle ait besoin de rouvrir le calcul sous-jacent.</p>
+
+  <h2>Les résultats et l'impact</h2>
+  <figure>
+    <img src="images/grand-marche-panier-temps.png" alt="Montant du panier en fonction du temps passé sur le site">
+    <figcaption>Corrélation positive entre temps passé et montant du panier, avec un seuil observable autour de 6 minutes.</figcaption>
+  </figure>
+  <p>Le high-tech représentait près de la moitié du chiffre d'affaires avant l'arrêt stratégique de ce segment, décidé l'année précédente : sa disparition explique directement la baisse de CA que Frédéric cherchait à comprendre, pas une perte de clientèle générale. Le trafic du site augmente nettement plus vite que les ventes depuis septembre, un écart croissant qui pointe vers une baisse du taux de conversion plutôt qu'un problème d'audience, une nuance importante pour orienter l'action correctement.</p>
+  <p>Le panier moyen suit une logique de seuil plus que de pente continue : sous 6 minutes de navigation, il reste proche de 30 à 40 €, au-delà il s'approche de 50 €, avec une dispersion assez large pour rappeler que ce n'est pas une règle systématique. Côté clients affiliés, la nourriture représente 62,8 % du chiffre d'affaires de février contre 37,2 % pour les biens de consommation, une répartition cohérente avec la stratégie de recentrage décidée par l'entreprise.</p>
+
+  <h2>Les limites et les prochaines pistes</h2>
+  <p>Frédéric demandait aussi une projection chiffrée du chiffre d'affaires pour les prochains mois. Le support livré propose des axes stratégiques argumentés, compenser l'arrêt du high-tech, améliorer la conversion, augmenter la valeur client, mais pas de graphique de projection à proprement parler : une limite assumée plutôt qu'une réponse habillée pour faire illusion.</p>
+  <p>Les pistes que je recommande : construire une projection simple à partir de la tendance des derniers mois pour la prochaine itération du rapport, et croiser le seuil des 6 minutes identifié sur le panier moyen avec des actions concrètes de parcours utilisateur, pour transformer une observation statistique en levier actionnable.</p>
+
+</article>
+
+<div class="wrap case-foot">
+  <a href="../index.html#projets">Retour aux projets</a>
+  <a href="https://github.com/ahmedelghrairi/analyse-ventes-grand-marche" target="_blank" rel="noopener">Le dépôt GitHub du projet</a>
+</div>
+
+<footer>
+  <p>Ahmed El Ghrairi, 2026.</p>
+</footer>
+
+</body>
+</html>
