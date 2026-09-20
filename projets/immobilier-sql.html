@@ -116,7 +116,7 @@ footer{padding:0 0 36px;color:var(--ink-soft);font-size:.85rem;text-align:center
 <div class="wrap">
   <div class="facts">
     <div class="fact"><p class="n">5 tables</p><p class="l">en 3e forme normale, contre 3 au départ</p></div>
-    <div class="fact"><p class="n">34 169</p><p class="l">ventes chargées, autant de biens, sans écart</p></div>
+    <div class="fact"><p class="n">34 169</p><p class="l">biens chargés, maisons et appartements, autant de ventes, sans écart</p></div>
     <div class="fact"><p class="n">13 requêtes</p><p class="l">des agrégats simples aux fonctions de fenêtrage</p></div>
     <div class="fact"><p class="n">12 084 €</p><p class="l">prix moyen du m² à Paris, le plus élevé de France</p></div>
   </div>
@@ -147,7 +147,7 @@ footer{padding:0 0 36px;color:var(--ink-soft);font-size:.85rem;text-align:center
   <p>Les treize requêtes progressent en complexité : des comptages et moyennes simples d'abord, puis des sous-requêtes corrélées pour calculer une proportion, des CTE (<code>WITH</code>) pour comparer deux trimestres côte à côte, et une fonction de fenêtrage, <code>ROW_NUMBER() OVER (PARTITION BY ...)</code>, pour classer les communes les plus chères à l'intérieur de chaque département plutôt que sur l'ensemble du pays. Le choix entre <code>WHERE</code> et <code>HAVING</code> revient plusieurs fois et vaut la peine d'être explicite : <code>WHERE</code> filtre les lignes avant regroupement, <code>HAVING</code> filtre un résultat déjà agrégé, comme un nombre de ventes par commune.</p>
 
   <h2>Les résultats et l'impact</h2>
-  <p>31 378 appartements vendus au premier semestre 2020, avec un déséquilibre régional très marqué : l'Île-de-France concentre 13 995 ventes, presque quatre fois plus que la région suivante, Provence-Alpes-Côte d'Azur avec 3 649. Sur le prix, Paris domine sans partage, 12 084 € du m² en moyenne, plus de 1,6 fois les Hauts-de-Seine, deuxième département le plus cher à 7 301 €.</p>
+  <p>Sur les 34 169 biens chargés, la première requête isole les appartements : 31 378 ont été vendus au premier semestre 2020, les 2 791 restants étant des maisons. Sur ce segment des appartements, un déséquilibre régional très marqué apparaît : l'Île-de-France concentre 13 995 ventes, presque quatre fois plus que la région suivante, Provence-Alpes-Côte d'Azur avec 3 649. Sur le prix, Paris domine sans partage, 12 084 € du m² en moyenne, plus de 1,6 fois les Hauts-de-Seine, deuxième département le plus cher à 7 301 €.</p>
   <p>Deux résultats intéressent particulièrement un projet de prédiction de prix. D'abord, la taille compte plus qu'on ne le pense au m² : un appartement de 3 pièces se vend en moyenne 12,7 % moins cher au m² qu'un 2 pièces, un effet à intégrer dans tout modèle plutôt qu'un simple prix au m² uniforme. Ensuite, malgré le contexte du premier semestre 2020, les ventes progressent de 3,68 % entre le premier et le deuxième trimestre, un signal de marché résilient plutôt qu'en repli.</p>
 
   <h2>Les limites et les prochaines pistes</h2>
