@@ -90,6 +90,14 @@ section h2{font-size:1.8rem;margin-bottom:8px}
 @media (max-width:760px){.about-grid{grid-template-columns:1fr}}
 .about-grid p{margin-bottom:14px}
 
+/* Posture / savoir-etre */
+.posture-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:8px}
+.posture-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;display:flex;flex-direction:column;gap:8px}
+.posture-card h3{font-size:1.02rem;color:var(--accent)}
+.posture-card p{font-size:.92rem}
+.posture-card a{font-size:.85rem;font-weight:600;text-decoration:none;margin-top:4px}
+.posture-card a:hover{text-decoration:underline}
+
 /* Compétences */
 .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
 .skill-card{
@@ -190,6 +198,7 @@ footer{padding:28px 0 36px;color:var(--ink-soft);font-size:.85rem;text-align:cen
     <a class="nav-name" href="#">Ahmed El Ghrairi</a>
     <div class="nav-links">
       <a href="#parcours">Parcours</a>
+      <a href="#posture">Ma posture</a>
       <a href="#competences">Compétences</a>
       <a href="#projets">Projets</a>
       <a href="#veille">Veille</a>
@@ -244,6 +253,34 @@ footer{padding:28px 0 36px;color:var(--ink-soft);font-size:.85rem;text-align:cen
           <p class="t-note">Titre RNCP niveau 6 reconnu par l'État, pédagogie à 80 % pratique : SQL, Python, cloud de données, Power BI, statistiques et machine learning, une dizaine de projets sur données réelles</p>
         </li>
       </ul>
+    </div>
+  </div>
+</section>
+
+<section id="posture">
+  <div class="wrap">
+    <h2>Ma posture au travail</h2>
+    <p class="section-sub">Plutôt qu'une liste de qualités, voici ce qu'elles signifient concrètement dans ma façon de travailler, avec un projet ou une expérience à l'appui de chacune.</p>
+    <div class="posture-grid">
+      <div class="posture-card">
+        <h3>Polyvalence</h3>
+        <p>D'un centre de formation en Tunisie à la direction d'un magasin Carrefour, puis à l'analyse de données : j'ai déjà changé de métier plusieurs fois et je m'y suis mis à niveau rapidement à chaque fois. Cette polyvalence se retrouve dans mes projets techniques : du SQL à la modélisation en cloud, du machine learning à la restitution Power BI, je ne me suis pas enfermé dans un seul outil.</p>
+      </div>
+      <div class="posture-card">
+        <h3>Organisation et pilotage</h3>
+        <p>Avant de construire quoi que ce soit, je cadre : neuf user stories validées avec la cliente avant d'ouvrir Power BI, un registre de risques et des jalons datés tenus sur toute une mission. Diriger une équipe de magasin au quotidien m'a appris à anticiper plutôt qu'à réagir.</p>
+        <a href="projets/suivi-projets.html">Voir le cadrage du projet de pilotage &rarr;</a>
+      </div>
+      <div class="posture-card">
+        <h3>Détermination</h3>
+        <p>Reprendre une formation intensive après dix ans de terrain, avec une pédagogie à 80 % pratique et une soutenance devant un évaluateur à chaque projet, ça ne se fait pas par hasard. Je suis aussi revenu volontairement sur mon propre travail pour l'améliorer, plutôt que de le considérer terminé une fois noté.</p>
+        <a href="projets/bottleneck-ia.html">Voir la reprise du projet BottleNeck &rarr;</a>
+      </div>
+      <div class="posture-card">
+        <h3>Goût du défi</h3>
+        <p>Sur l'étude de marché international, aucun pays et aucun critère n'étaient donnés au départ : il fallait construire la méthode entièrement. Sur la détection de faux billets, le vrai défi n'était pas le modèle mais le seuil de décision, une question de coût métier que j'ai posée moi-même plutôt que de garder le réglage par défaut.</p>
+        <a href="projets/etude-marche.html">Voir l'étude de marché &rarr;</a>
+      </div>
     </div>
   </div>
 </section>
